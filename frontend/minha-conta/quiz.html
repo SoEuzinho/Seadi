@@ -2,11 +2,24 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#1a1c23">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Quiz Multiplayer — Minha Área</title>
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../css/estilominhaconta.css">
   <link rel="stylesheet" href="../css/quiz.css">
+  <style>
+    /* Previne zoom automático no iOS ao focar em inputs */
+    @supports (-webkit-touch-callout: none) {
+      input[type="text"], input[type="email"], input[type="password"] {
+        font-size: 16px !important;
+      }
+    }
+  </style>
 </head>
 <body>
 

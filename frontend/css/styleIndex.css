@@ -45,6 +45,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -52,6 +53,8 @@ html, body {
     min-height: 100vh;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -60,7 +63,9 @@ body {
     background-color: var(--bg-base);
     color: var(--text-pure);
     position: relative;
-    -webkit-font-smoothing: antialiased; /* Deixa a fonte mais fina e nítida */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 
@@ -760,6 +765,16 @@ body {
         margin-left: -20px;
         margin-right: -20px;
     }
+}
+
+/* Mobile muito pequeno (320px e menos) */
+@media (max-width: 360px) {
+    .header-elite { padding: 12px 15px; }
+    .logo-box img { height: 40px; }
+    .hero-title { font-size: 1.7rem; }
+    .glass-shell { padding: 30px 15px; border-radius: 25px; }
+    .grid-premium { gap: 15px; }
+    .card-elite { padding: 12px; border-radius: 20px; }
 }
 
 /* ── Badge BETA (Quiz Multiplayer) ── */

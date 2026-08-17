@@ -109,7 +109,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
     @Body() dto: LoginDto,
   ) {
-    const result = await this.authService.login(dto, req.ip);
+    const result = await this.authService.login(dto);
     // Token JWT vai para cookie httpOnly (invisível para JS/XSS).
     res.cookie(SESSION_COOKIE_NAME, result.token, sessionCookieOptions());
     return { user: result.user };
@@ -138,8 +138,7 @@ export class AuthController {
   @Post('forgot-password')
   @HttpCode(HttpStatus.OK)
   async forgotPassword(@Req() req: Request, @Body() dto: ForgotPasswordDto) {
-    // O IP é usado para rate limiting (evitar spam de e-mails/CPU).
-    return this.authService.forgotPassword(dto, req.ip);
+    return this.authService.forgotPassword(dto);
   }
 
   /**

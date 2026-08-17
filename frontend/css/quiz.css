@@ -6,6 +6,15 @@
    em tempo real e pódio final.
    ========================================================================== */
 
+/* Cross-browser: previne seleção de texto em botões interativos */
+.quiz-alt, .quiz-cat, .btn-enter, .btn-create-room, .rc-enter, .btn-start-room, .btn-cancel-room, .room-leave, .game-leave {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
 /* ── Cabeçalho da página ── */
 .quiz-hero .quiz-title-row {
   display: flex;
@@ -717,10 +726,13 @@
   text-align: left;
   cursor: pointer;
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   /* Entrada escalonada e leve (só transform/opacity = GPU-friendly).
      `backwards` esconde durante o delay da escada e libera o estilo
      ao final, preservando o transform do hover. */
   animation: altIn 0.32s ease backwards;
+  min-height: 56px;
 }
 
 @keyframes altIn {
@@ -1105,6 +1117,8 @@
   .qr-podium-item { min-width: 0; flex: 1; padding: 14px 10px 12px; }
   .qr-p-name { font-size: 0.8rem; }
   .qr-table { min-width: 0; }
+  .game-alts { gap: 10px; }
+  .quiz-alt { min-height: 52px; }
 }
 
 /* ── Ações da home (salas + ranking) ── */
@@ -1245,5 +1259,40 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Compatibilidade com navegadores mais antigos ── */
+@supports not (backdrop-filter: blur(40px)) {
+  .game-ranking {
+    background: rgba(33, 36, 44, 0.98);
+  }
+}
+
+/* ── Modo escuro do sistema (já é escuro por padrão) ── */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-page: #1A1C23;
+    --bg-card: #21242C;
+  }
+}
+
+/* ── Touch: botões maiores em telas touch ── */
+@media (hover: none) and (pointer: coarse) {
+  .quiz-alt {
+    min-height: 56px;
+    padding: 16px 18px;
+  }
+  
+  .quiz-cat {
+    min-height: 80px;
+  }
+  
+  .room-card .rc-enter {
+    min-height: 48px;
+  }
+  
+  .btn-enter, .btn-create-room {
+    min-height: 52px;
   }
 }

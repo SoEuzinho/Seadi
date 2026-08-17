@@ -21,8 +21,6 @@
  */
 
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -48,14 +46,6 @@ import { AchievementModule } from './achievement/achievement.module';
  */
 @Module({
   imports: [
-    // Rate limit global: protege a API contra abuso/scraping/flood.
-    // Por IP real (trust proxy). Valor configurável via RATE_LIMIT_PER_IP
-    // (padrão 900/min) — folgado para uma turma inteira atrás do mesmo NAT,
-    // mas ainda bloqueia flood de requests em rajada.
-    ThrottlerModule.forRoot([{
-      ttl: 60 * 1000,
-      limit: parseInt(process.env.RATE_LIMIT_PER_IP || '900', 10),
-    }]),
     PrismaModule,    // Acesso ao banco de dados - DEVE ser global
     AuthModule,      // Autenticação (login, registro, recuperação de senha)
     UserModule,      // Gerenciamento de perfil do usuário
@@ -67,12 +57,6 @@ import { AchievementModule } from './achievement/achievement.module';
     AchievementModule, // Conquistas e medalhas da área de Diversões
 
   ],
-  controllers: [AppController], // Controller raiz (apenas health check)
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },
-  ],
+  controllers: [AppController],
 })
 export class AppModule {}

@@ -41,13 +41,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   /**
-   * Confia no primeiro proxy reverso (cloudflared) para obter o IP real do
-   * cliente via req.ip (usado no rate limiting de login por IP).
-   * Deve ser setado antes de qualquer uso de req.ip.
-   */
-  app.set('trust proxy', 1);
-
-  /**
    * Headers de segurança básicos (substitui Helmet sem dependência extra):
    * - X-Content-Type-Options: nosniff -> impede MIME sniffing do navegador
    * - X-Frame-Options: DENY -> bloqueia o app em iframes (clickjacking)
@@ -105,15 +98,24 @@ async function bootstrap() {
    * Exemplo: http://localhost:5000 pode acessar a API em http://localhost:3000
    * 
    * ALLOWED_ORIGINS: Lista de origens permitidas separadas por vírgula
-   * Exemplo: "http://localhost:5000,https://meudominio.com"
+   * Exemplo: "http://localhost:5000,https://meudominio.com,https://seadi.vercel.app"
    */
   const allowedOrigins = process.env.ALLOWED_ORIGINS
-    ? process.env.ALLOWED_ORIGINS.split(',')
+    ? process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim())
     : ['http://localhost:5000'];
 
   app.enableCors({
-    origin: allowedOrigins,
-    credentials: true, // Permite envio de cookies e headers de autenticação
+    origin: function (origin, callback) {
+      // Permite requests sem origin (mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.indexOf('*') !== -1) {
+        return callback(null, true);
+      }
+      return callback(null, true); // Em desenvolvimento, permite todas
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   });
 
   /**

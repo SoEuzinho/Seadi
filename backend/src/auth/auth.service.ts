@@ -67,11 +67,6 @@ const LOGIN_ATTEMPTS_RETENTION_MS = 24 * 60 * 60 * 1000; // 24h
 // nova solicitação para a tabela RedefinicaoSenha não crescer sem limite.
 const RESET_CODE_RETENTION_MS = 7 * 24 * 60 * 60 * 1000; // 7 dias
 
-// Rate limiting de recuperação de senha por IP (além do cooldown por e-mail):
-// evita spam de e-mails e custo de bcrypt por requisição.
-const FORGOT_MAX_PER_IP = 5;
-const FORGOT_WINDOW_MS = 10 * 60 * 1000; // 10 min
-
 /**
  * Serviço de autenticação do sistema SEADI.
  * 
@@ -97,9 +92,6 @@ export class AuthService {
     private mailService: MailService,
     private activity: ActivityService,
   ) {}
-
-  /** Rate limiting em memória por IP para /forgot-password (chave: IP -> timestamps). */
-  private forgotByIp = new Map<string, number[]>();
 
   /**
    * Registra um novo usuário no sistema.
@@ -181,7 +173,7 @@ export class AuthService {
    * 
    * @throws UnauthorizedException - Credenciais inválidas ou muitas tentativas
    */
-  async login(dto: LoginDto, ip?: string) {
+  async login(dto: LoginDto) {
     // Normaliza o email
     const normalizedEmail = dto.email.toLowerCase().trim();
 
@@ -211,19 +203,13 @@ export class AuthService {
     const maxAttempts = parseInt(process.env.MAX_LOGIN_ATTEMPTS || '5', 10);
     const since = new Date(Date.now() - loginWindow * 1000);
 
-    const ipAttempts = ip
-      ? await this.prisma.tentativaLogin.count({
-          where: { ip, sucesso: false, momento: { gte: since } },
-        })
-      : 0;
-
     const userAttempts = user
       ? await this.prisma.tentativaLogin.count({
           where: { usuarioId: user.id, sucesso: false, momento: { gte: since } },
         })
       : 0;
 
-    if (ipAttempts >= maxAttempts || userAttempts >= maxAttempts) {
+    if (userAttempts >= maxAttempts) {
       throw new UnauthorizedException('Too many attempts. Try again later.');
     }
 
@@ -238,7 +224,6 @@ export class AuthService {
     await this.prisma.tentativaLogin.create({
       data: {
         usuarioId: user?.id ?? null,
-        ip: ip || null,
         sucesso: passwordValid,
       },
     });
@@ -288,36 +273,13 @@ export class AuthService {
      * 
      * @throws BadRequestException - Se cooldown não expirou
      */
-  async forgotPassword(dto: ForgotPasswordDto, ip?: string) {
+  async forgotPassword(dto: ForgotPasswordDto) {
     const normalizedEmail = dto.email.toLowerCase().trim();
 
     // Limpeza preguiçosa: remove códigos antigos (já expirados e irrelevantes).
     await this.prisma.redefinicaoSenha.deleteMany({
       where: { criadoEm: { lt: new Date(Date.now() - RESET_CODE_RETENTION_MS) } },
     });
-
-    // Rate limit por IP (além do cooldown por e-mail): impede spam de e-mails
-    // e custo de bcrypt repetido com emails diferentes.
-    if (ip) {
-      const agora = Date.now();
-      const recentes = (this.forgotByIp.get(ip) || []).filter(
-        (t) => agora - t < FORGOT_WINDOW_MS,
-      );
-      if (recentes.length >= FORGOT_MAX_PER_IP) {
-        throw new BadRequestException('Too many requests. Try again later.');
-      }
-      recentes.push(agora);
-      this.forgotByIp.set(ip, recentes);
-
-      // Poda do mapa para impedir crescimento sem limite.
-      if (this.forgotByIp.size > 10000) {
-        for (const [k, v] of this.forgotByIp) {
-          const vivos = v.filter((t) => agora - t < FORGOT_WINDOW_MS);
-          if (vivos.length === 0) this.forgotByIp.delete(k);
-          else this.forgotByIp.set(k, vivos);
-        }
-      }
-    }
 
     // Verifica se o usuário existe
     const user = await this.prisma.usuario.findUnique({

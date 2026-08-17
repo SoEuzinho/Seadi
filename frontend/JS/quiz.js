@@ -457,11 +457,16 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'quiz-alt';
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-label', 'Alternativa ' + letterOf(i) + ': ' + text);
       btn.innerHTML =
         '<span class="alt-letter">' + letterOf(i) + '</span>' +
         '<span>' + esc(text) + '</span>';
-      btn.addEventListener('click', function () {
+
+      // Suporte a touch: previne double-tap zoom e melhora feedback em mobile
+      btn.addEventListener('click', function (e) {
         if (!canAnswer || state.answered || state.view !== 'game') return;
+        e.preventDefault();
         state.answered = true;
         btn.classList.add('selected');
         var all = els.alternativas.querySelectorAll('.quiz-alt');
@@ -472,7 +477,14 @@
           index: i,
           questionIndex: state.currentQuestion,
         });
-      });
+      }, { passive: false });
+
+      // Previne double-tap zoom em iOS
+      btn.addEventListener('touchend', function (e) {
+        e.preventDefault();
+        btn.click();
+      }, { passive: false });
+
       btn.style.animationDelay = (i * 60) + 'ms';
       if (!canAnswer) btn.disabled = true;
       els.alternativas.appendChild(btn);
@@ -558,8 +570,13 @@
   /* ───────────── SOCKET ───────────── */
 
   function connectSocket() {
+    var socketUrl = SOCKET_BASE || window.location.origin;
     state.socket = io('/quiz', {
       transports: ['websocket', 'polling'],
+      secure: true,
+      reconnection: true,
+      reconnectionAttempts: 10,
+      reconnectionDelay: 1000,
     });
 
     state.socket.on('connect', function () {
