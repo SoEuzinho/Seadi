@@ -1,0 +1,503 @@
+/* CSS DA PAGE LOGIN*/
+
+/* ==========================================================================
+   PALETA DE CORES SISTEMATIZADA (idêntica ao styleIndex.css)
+   ========================================================================== */
+:root {
+    /* Tons Neutros e Fundo */
+    --bg-base: #1a1c23;            /* Fundo escuro elegante de base */
+    --text-pure: #ffffff;
+    --text-muted: #94a3b8;         /* Cinza azulado para textos secundários */
+    --text-divider: rgba(63, 77, 97, 0.3);
+    --text-dark: #1e293b;          /* Textos escuros para menus internos */
+
+    /* Efeito Glassmorphism e Transparência (Corrigido para tons neutros) */
+    --glass-fundo-card: rgba(20, 25, 35, 0.25);      /* Vidro fosco escuro/neutro */
+    --glass-borda-card: rgba(255, 255, 255, 0.15);   /* Borda cristalina principal */
+    --glass-borda-soft: rgba(255, 255, 255, 0.08); 
+    --bg-input-disabled: rgba(255, 255, 255, 0.05);
+
+    /* Cores de Ação (Neon Glow) */
+    --action-blue: #0ea5e9;
+    --action-indigo: #6366f1;
+    --hover-link: #38bdf8;
+
+    /* Aliases para compatibilidade com as demais páginas do sistema
+       (cadastro, criarconta, esqueci, estilominhaconta, privacidade,
+       progresso, termos), que usam esses mesmos nomes de variável. */
+    --brand: var(--action-blue);
+    --brand-light: rgba(14, 165, 233, 0.14);
+    --brand-dark: var(--hover-link);
+    --accent: var(--action-indigo);
+    --text-primary: var(--text-pure);
+    --text-secondary: var(--text-muted);
+    --bg-page: var(--bg-base);
+    --bg-card: #21242c;
+    --border: var(--glass-borda-soft);
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --success: #10b981;
+}
+
+/* --- FUNDAMENTOS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-base);
+    overflow-y: auto;
+    color: var(--text-pure);
+    padding: 20px 0;
+}
+
+
+
+
+/*  ESTRUTURA E CARD  */
+.main-wrapper {
+    width: 100%;
+    max-width: 480px; /* Card maior e mais imponente */
+    padding: 20px;
+    z-index: 10;
+}
+
+.login-card {
+    background: var(--glass-fundo-card);
+    backdrop-filter: blur(40px);                    /* Desfoque mais profundo para efeito cristal real */
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-borda-card);  /* contorno da borda CARD */
+    border-radius: 40px;                            /* Bordas mais arredondadas estilo iOS */
+    padding: 60px 50px;                             /* Mais espaço interno */
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* LOGO E TEXTOS */
+.main-logo {
+    width: 160px;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.4));
+}
+
+.tagline {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--text-muted);     /*educação digital inteligente */
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-left: 5px; /* compensa o letter-spacing para centralizar óptico */
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
+/* --- INPUTS --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* CAIXA */
+.input-group input {
+    width: 100%;
+    background:    var(--bg-input-disabled);            /* fundo da caixa desativada */
+    border: 1px solid var(--glass-borda-soft);     /* borda da caixa desativada */
+    border-radius: 18px;
+    padding: 20px 24px;
+    color: var(--text-pure);                                 /* letra dentro da caixa */
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-group input:focus {
+    background: rgba(0, 0, 0, 0.4);                /* fundo da caixa */
+    border-color: var(--action-blue);                          /* borda da caixa */
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.15);  /* sombra da caixa */
+    transform: scale(1.02);
+}
+
+/* --- VISUALIZAR SENHA --- */
+.input-group .pw-field {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Mensagem de erro anexada ao campo de senha: quebra para a linha de baixo
+   (o .pw-field é flex; sem isso o erro ficaria ao lado do input). */
+.input-group .pw-field .field-error {
+    flex: 0 0 100%;
+    order: 99;
+}
+
+.input-group .pw-field .pw-input {
+    padding-right: 52px;
+}
+
+.input-group .pw-field .pw-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color 0.2s;
+}
+
+.input-group .pw-field .pw-toggle:hover {
+    color: var(--action-blue);
+}
+
+.input-group .pw-field .pw-toggle svg {
+    display: block;
+}
+
+/* Ícone como imagem (img/icons/*.svg): leve feedback no hover */
+.input-group .pw-field .pw-toggle .pw-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    opacity: 0.85;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.input-group .pw-field .pw-toggle:hover .pw-icon {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.input-group .pw-field .pw-toggle:focus-visible {
+    outline: 2px solid var(--action-blue);
+    outline-offset: 2px;
+}
+
+/* BOTÃO CAMALEÃO  */
+.btn-login {
+    background: linear-gradient(90deg, var(--action-blue), var(--action-indigo), var(--action-blue));
+    background-size: 200% auto;
+    color: white; /* ENTRAR */ 
+    border: none;
+    border-radius: 18px;
+    padding: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.5s;
+    animation: moveGradiente 4s linear infinite;
+    margin-top: 15px;
+    box-shadow: 0 15px 30px rgba(14, 165, 233, 0.3); /* SOMBRA DO btn DO RODAPÉ */
+}
+
+@keyframes moveGradiente {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* SOMBRA QUANDO PASSA O MOUSE NO btn DO RODAPÉ */
+.btn-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.4);
+}
+
+/* --- RODAPÉ DO CARD --- */
+.divider {
+    margin: 35px 0 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-muted); /* ---- ou ---- */
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--glass-borda-card); 
+}
+
+.forgot-password {
+    color: var(--text-muted);   /* esqueceu sua senha? */
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.forgot-password:hover { color: var(--hover-link); }
+
+/* --- CADASTRE-SE (chamada principal para novos usuários) --- */
+.signup-box {
+    margin-top: 24px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.09), rgba(99, 102, 241, 0.06));
+    padding: 26px 22px;
+    border-radius: 25px;
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.signup-text {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.btn-signup {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--action-indigo), var(--action-blue));
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 19px 24px;
+    border-radius: 18px;
+    box-shadow: 0 15px 30px rgba(14, 165, 233, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-signup svg {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+/* Anel pulsante sutil para atrair a atenção (só transform/opacity = leve) */
+.btn-signup::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 21px;
+    border: 2px solid rgba(14, 165, 233, 0.55);
+    opacity: 0;
+    animation: signupPulse 2.4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes signupPulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.04); }
+}
+
+.btn-signup:hover {
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 22px 44px rgba(14, 165, 233, 0.5);
+}
+
+.btn-signup:hover svg { transform: translateX(4px); }
+
+.btn-signup:active { transform: translateY(-1px) scale(0.98); }
+
+.signup-hint {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (celulares)
+   ========================================================================== */
+
+@media (max-width: 576px) {
+    body { padding: 10px 0; align-items: flex-start; }
+    .main-wrapper { padding: 12px; }
+    .login-card {
+        padding: 40px 22px;
+        border-radius: 28px;
+    }
+    .main-logo { width: 120px; margin-bottom: 18px; }
+    .tagline { letter-spacing: 3px; font-size: 10px; }
+    .title { font-size: 24px; margin-bottom: 30px; }
+    .login-form { gap: 16px; }
+    .input-group input {
+        padding: 16px 18px;
+        border-radius: 14px;
+        font-size: 16px; /* evita zoom automático do iOS */
+    }
+    .input-group input:focus { transform: none; }
+    .input-group .pw-field .pw-toggle { right: 10px; }
+    .input-group .pw-field .pw-input { padding-right: 46px; }
+    .btn-login {
+        padding: 16px;
+        border-radius: 14px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .divider { margin: 28px 0 20px; }
+    .signup-box { padding: 20px 16px; border-radius: 20px; }
+    .signup-text { font-size: 13px; margin-bottom: 13px; }
+    .btn-signup {
+        padding: 16px 20px;
+        font-size: 15px;
+        border-radius: 15px;
+        letter-spacing: 0.5px;
+    }
+    .btn-signup::after { border-radius: 18px; }
+    .signup-hint { font-size: 11px; margin-top: 12px; }
+}
+
+@media (max-width: 360px) {
+    .login-card { padding: 32px 16px; }
+    .main-logo { width: 100px; }
+}
+
+/* Entrada da página (leve: só transform/opacity, GPU-friendly) */
+main {
+    animation: pageIn 0.4s ease;
+}
+
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   UX PARA PÚBLICO LEIGO — rótulos claros, loading com spinner e entrada
+   suave. Apenas camada visual: nada de IDs/names/endpoints alterados.
+   ========================================================================== */
+
+/* ── Rótulos dos campos (texto simples, sempre visíveis) ── */
+.field-label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--text-secondary);
+}
+
+.field-label .req {
+    color: #f87171;
+    margin-left: 2px;
+}
+
+.field-label .opcional {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ── Spinner de carregamento (dentro do botão) ── */
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: giro 0.7s linear infinite;
+    vertical-align: -3px;
+    margin-right: 8px;
+}
+
+@keyframes giro {
+    to { transform: rotate(360deg); }
+}
+
+/* Botão em processamento: visual de "ocupado", sem envio duplo */
+.btn-login[aria-busy="true"] {
+    animation: none;
+    opacity: 0.85;
+    cursor: progress;
+    transform: none;
+}
+
+/* ── Feedback tátil do botão (desktop e toque) ── */
+.btn-login:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ── Entrada escalonada dos elementos (rápida, ~0.5s) ── */
+.login-card > header,
+.login-card > .auth-sub,
+.login-card > .tabs,
+.login-card > .login-form,
+.login-card > .card-footer,
+.signup-box {
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.login-card > header     { animation-delay: 0.05s; }
+.login-card > .auth-sub  { animation-delay: 0.10s; }
+.login-card > .tabs      { animation-delay: 0.10s; }
+.login-card > .login-form{ animation-delay: 0.12s; }
+.login-card > .card-footer { animation-delay: 0.25s; }
+.signup-box              { animation-delay: 0.30s; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Caixa de sucesso (ex.: "Conta criada com sucesso!") ── */
+.success-box {
+    display: none;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 18px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #10b981;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.success-box.show {
+    display: block;
+    animation: fadeUp 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main { animation: none; }
+    .btn-signup::after { animation: none; opacity: 0; }
+
+    /* Sem entrada escalonada: tudo visível de imediato */
+    .login-card > header,
+    .login-card > .auth-sub,
+    .login-card > .tabs,
+    .login-card > .login-form,
+    .login-card > .card-footer,
+    .signup-box {
+        opacity: 1;
+        animation: none;
+    }
+
+    /* Spinner parado (o texto "Entrando..." já indica o estado) */
+    .spinner { animation: none; }
+
+    .success-box.show { animation: none; }
+}

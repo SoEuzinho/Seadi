@@ -1,0 +1,141 @@
+/* Criar Conta - Estilos adicionais (base: estilos (1).css) */
+
+.auth-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* ── Aceite dos Termos (checkbox grande e fácil de tocar no celular) ── */
+.login-card .checkbox-group {
+    margin-top: 8px;
+    flex-shrink: 0;
+}
+
+.checkbox-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-borda-soft);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.checkbox-label:active {
+    background: rgba(14, 165, 233, 0.07);
+}
+
+/* Estado "aceito": o grupo inteiro ganha destaque */
+.checkbox-group.accepted .checkbox-label {
+    border-color: rgba(14, 165, 233, 0.5);
+    background: rgba(14, 165, 233, 0.07);
+}
+
+/* O input nativo fica oculto (mas continua focado por teclado) */
+.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Caixa customizada (bem maior que o checkbox nativo) */
+.checkbox-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 2px solid rgba(148, 163, 184, 0.45);
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checkbox-box svg {
+    width: 19px;
+    height: 19px;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-box {
+    background: linear-gradient(135deg, var(--action-blue), var(--action-indigo));
+    border-color: var(--action-blue);
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-box svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.checkbox-label input[type="checkbox"]:focus-visible + .checkbox-box {
+    outline: 2px solid var(--action-blue);
+    outline-offset: 2px;
+}
+
+.checkbox-label .checkbox-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Erro de validação exibido numa linha própria */
+.checkbox-label .field-error {
+    flex-basis: 100%;
+}
+
+.login-card .checkbox-group a {
+    color: var(--action-blue);
+    text-decoration: underline;
+    font-weight: 600;
+    text-underline-offset: 3px;
+}
+
+.login-card .checkbox-group a:hover {
+    color: var(--hover-link);
+}
+
+/* Mobile: área de toque generosa mantida */
+@media (max-width: 576px) {
+    .checkbox-label { padding: 16px 16px; gap: 12px; }
+    .checkbox-box { width: 28px; height: 28px; border-radius: 9px; }
+    .checkbox-box svg { width: 17px; height: 17px; }
+    .checkbox-label .checkbox-text { font-size: 13px; }
+}
+
+/* ── Senha: força e regras ── */
+.pw-strength { margin-top: 12px; }
+.pw-strength-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.pw-strength-bar { display: flex; gap: 4px; }
+.pw-bar-seg { flex: 1; height: 4px; border-radius: 99px; background: rgba(255,255,255,0.08); transition: background 0.3s; }
+
+.pw-rules { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; margin-bottom: 5px; }
+.pw-rule { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); transition: color 0.2s; }
+.pw-rule.ok { color: #10b981; }
+.pw-rule-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.08); flex-shrink: 0; transition: background 0.2s; }
+.pw-rule.ok .pw-rule-dot { background: #10b981; }
+
+/* ── Confirmar senha hint ── */
+#confirm-hint {
+    font-size: 12px;
+    margin-top: -12px;
+    margin-bottom: 5px;
+    display: block;
+}

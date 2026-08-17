@@ -1,0 +1,212 @@
+/* ==========================================================================
+   TUTORIAL INTERATIVO SEADI
+   ========================================================================== */
+
+.tut-box {
+    position: fixed;
+    z-index: 100000;
+    border: 2px solid var(--action-blue, #0ea5e9);
+    border-radius: 16px;
+    box-shadow: 0 0 0 9999px rgba(9, 11, 16, 0.72);
+    background: transparent;
+    pointer-events: none;
+    transition: all 0.25s ease;
+}
+
+/* Anel pulsante ao redor do destaque */
+.tut-box::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 18px;
+    border: 2px solid rgba(14, 165, 233, 0.45);
+    animation: tutRing 1.6s ease-out infinite;
+}
+
+@keyframes tutRing {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.08); opacity: 0; }
+}
+
+.tut-tip {
+    position: fixed;
+    z-index: 100001;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: #131722;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-family: inherit;
+}
+
+.tut-tip.tut-anim {
+    animation: tutPop 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes tutPop {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tut-kicker {
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.tut-progress {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 10px;
+}
+
+.tut-tip h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.tut-tip p {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 20px;
+}
+
+.tut-dots {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tut-dot {
+    height: 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    flex: 1;
+    transition: background 0.3s ease;
+}
+
+.tut-dot.active {
+    background: #0ea5e9;
+}
+
+.tut-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.tut-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tut-btn:focus-visible,
+.tut-skip:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+}
+
+.tut-btn-primary {
+    background: #0ea5e9;
+    color: #fff;
+    flex: 1;
+}
+
+.tut-btn-primary:hover {
+    background: #38bdf8;
+}
+
+.tut-btn-ghost {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.tut-btn-ghost:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.tut-skip {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.tut-skip:hover {
+    color: #fff;
+}
+
+.tut-replay {
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .tut-box {
+        border-radius: 10px;
+    }
+
+    .tut-tip {
+        box-sizing: border-box;
+        width: auto;
+        left: 12px !important;
+        right: 12px;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        top: auto !important;
+        max-width: none;
+        max-height: 45vh;
+        padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+        border-radius: 18px;
+        border-bottom: none;
+        box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .tut-tip::after {
+        content: "";
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.18);
+    }
+
+    .tut-tip h3 {
+        font-size: 1.15rem;
+    }
+
+    .tut-tip p {
+        font-size: 0.92rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tut-box,
+    .tut-box::before,
+    .tut-tip.tut-anim {
+        transition: none;
+        animation: none;
+    }
+}

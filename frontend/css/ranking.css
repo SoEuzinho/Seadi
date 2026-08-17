@@ -1,0 +1,576 @@
+/* ==========================================================================
+   RANKING — Área de Diversões (Minha Conta)
+   ========================================================================== */
+
+.rank-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 22px;
+  animation: rankIn 0.4s ease;
+}
+
+.rank-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.rank-title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+@keyframes rankIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rank-loading,
+.rank-empty {
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+/* ── Estatísticas da turma ── */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  transform: translateY(-2px);
+}
+
+.stat-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--brand);
+}
+
+.stat-icone svg { width: 20px; height: 20px; }
+
+.stat-valor {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.stat-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand);
+  margin-top: -2px;
+}
+
+.streak-time { color: #F59E0B !important; }
+
+.ach-rank-bar {
+  width: 100%;
+  max-width: 180px;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.ach-rank-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #F59E0B, #FBBF24);
+}
+
+/* ── Melhores no Quiz ── */
+.quiz-stat { color: var(--text-primary); font-size: 14px; }
+.quiz-nota { font-weight: 700; color: #34D399; }
+
+/* ── Pioneiros ── */
+.pioneer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.pioneer-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 12px 14px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pioneer-card:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  transform: translateY(-2px);
+}
+
+.pioneer-numero {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.pioneer-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(245, 158, 11, 0.35);
+}
+
+.pioneer-card strong {
+  color: var(--text-primary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.pioneer-desde {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Online ── */
+.online-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.online-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #A7F3D0;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ── Tabela de alunos ── */
+.rank-table-wrap {
+  overflow-x: auto;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 640px;
+}
+
+.rank-table th {
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.rank-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.rank-table tr:last-child td { border-bottom: none; }
+.rank-table tr.done-row td { background: rgba(16, 185, 129, 0.05); }
+
+.st-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+}
+
+.st-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.chip-avatar {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.podium-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.badge-tudo {
+  color: var(--success);
+  font-size: 14px;
+}
+
+.sub-line {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.streak-line { color: #FBBF24; }
+
+.st-last { color: var(--text-muted); }
+
+/* Destaque da linha do usuário logado */
+.row-eu {
+  background: rgba(14, 165, 233, 0.08) !important;
+  outline: 1px solid rgba(14, 165, 233, 0.35);
+  outline-offset: -1px;
+}
+
+.chip-eu {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #fff;
+  background: var(--brand);
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
+/* Títulos de honra do top 3 */
+.titulo {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.titulo-campeao { color: #F59E0B; }
+.titulo-vice    { color: #94A3B8; }
+.titulo-terceiro{ color: #D97706; }
+
+/* Campeões por categoria */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.cat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.cat-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.cat-icone { font-size: 18px; }
+
+.cat-head h3 {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cat-empty { margin: 6px 0; }
+
+.cat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 10px;
+}
+
+.cat-item.row-eu { background: rgba(14, 165, 233, 0.08); }
+
+.cat-medal { flex: none; }
+
+.cat-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  flex: none;
+}
+
+.cat-info { flex: 1; min-width: 0; }
+
+.cat-info strong { font-size: 13px; color: var(--text-primary); }
+
+.cat-sub {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cat-vit {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent);
+  flex: none;
+}
+
+/* Medais e posição */
+.medal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.medal-gold   { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+.medal-silver { background: linear-gradient(135deg, #64748B, #94A3B8); }
+.medal-bronze { background: linear-gradient(135deg, #B45309, #D97706); }
+.rank-pos     { color: var(--text-muted); font-weight: 700; }
+
+/* Barra de progresso */
+.pbar {
+  display: inline-block;
+  width: 90px;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.pbar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transition: width 0.6s ease;
+}
+
+.pbar-pct {
+  margin-left: 8px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 12px;
+}
+
+/* ── Pódio (curso mais rápido) ── */
+.podium-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.podium-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.podium-medal { flex-shrink: 0; }
+
+.podium-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.podium-info strong {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.podium-sub { font-size: 12px; color: var(--text-muted); }
+
+.podium-time {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--brand-dark);
+  white-space: nowrap;
+}
+
+/* ── Gráfico de dias ── */
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 190px;
+  padding: 10px 4px 0;
+}
+
+.chart-col {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.chart-val {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 34px;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, var(--brand), rgba(14, 165, 233, 0.35));
+  min-height: 4px;
+  position: relative;
+  transition: filter 0.2s ease;
+}
+
+.chart-bar.is-today { background: linear-gradient(180deg, #F59E0B, rgba(245, 158, 11, 0.4)); }
+
+.chart-bar:hover { filter: brightness(1.2); }
+
+.chart-tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0B0E14;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.chart-bar:hover .chart-tip { opacity: 1; }
+
+.chart-label {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .rank-section { padding: 16px; }
+  .rank-title { font-size: 15px; }
+  .podium-time { font-size: 13px; }
+  .chart-bars { gap: 3px; }
+  .chart-label { font-size: 9px; }
+}
+
+@media (max-width: 480px) {
+  .rank-section { padding: 14px; }
+  .rank-table th:nth-child(5),
+  .rank-table td:nth-child(5) { display: none; }
+  .quiz-table th:nth-child(6),
+  .quiz-table td:nth-child(6) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rank-section { animation: none; }
+  .online-dot { animation: none; }
+}

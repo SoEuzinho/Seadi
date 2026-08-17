@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar Senha — Minha Área</title>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/estilominhaconta.css">
+    <link rel="stylesheet" href="../css/tutorial.css">
+</head>
+<body>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <a href="../index.html"><img src="../img/seadi_1.png" alt="Logo SEADI" class="sidebar-logo-img"></a>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-label">Principal</span>
+    <a class="nav-link" href="../index.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 21V12h6v9"/></svg>
+      Página inicial
+    </a>
+    <a class="nav-link" href="progresson1.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Progresso
+    </a>
+    <span class="nav-label">Diversões</span>
+    <a class="nav-link" href="quiz.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16M4 8l6 2M20 8l-6 2"/><path d="M3 16h18"/></svg>
+      Quiz Multiplayer
+      <span class="badge-beta">BETA</span>
+    </a>
+    <a class="nav-link" href="ranking.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8"/></svg>
+      Ranking
+    </a>
+    <a class="nav-link" href="conquistas.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0z"/></svg>
+      Conquistas
+    </a>
+    <a class="nav-link" href="interativo.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg>
+      Simuladores
+      <span class="badge-beta">BETA</span>
+    </a>
+    <span class="nav-label">Conta</span>
+    <a class="nav-link" href="cadastro.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Dados cadastrais
+    </a>
+    <a class="nav-link" href="criadores.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Criadores
+    </a>
+    <a class="nav-link active" href="senha.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Alterar senha
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-link danger" href="#" onclick="logout()">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+      Sair
+    </a>
+  </div>
+</aside>
+
+<header class="header">
+  <div class="header-left">
+    <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+    <span class="header-title">Alterar senha</span>
+  </div>
+  <div class="perfil-wrapper">
+    <div class="profile-trigger" id="btn-menu-perfil">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-pequeno">
+      <span id="display-nome-curto">Usuário</span>
+      <i class="arrow-icon">▼</i>
+    </div>
+    <div id="idMenuPerfil" class="menu-premium">
+      <a href="cadastro.html">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Minha Conta
+      </a>
+      <a href="#" onclick="logout()" class="btn-logout">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+        Sair da Plataforma
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="page-header">
+    <h1>Alterar senha</h1>
+    <p>Escolha uma senha segura e diferente das anteriores.</p>
+  </div>
+
+  <div class="card card-narrow">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label">Senha atual</label>
+        <div class="pw-field">
+          <input class="form-input pw-input" type="password" id="pw-atual" placeholder="Digite sua senha atual" autocomplete="current-password">
+          <button type="button" class="pw-toggle" onclick="togglePw('pw-atual')" aria-label="Mostrar senha" title="Mostrar senha" aria-pressed="false" aria-controls="pw-atual">
+            <svg class="pw-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+
+      <div class="form-group full">
+        <label class="form-label">Nova senha</label>
+        <div class="pw-field">
+          <input class="form-input pw-input" type="password" id="pw-nova" placeholder="Mínimo 4 caracteres" oninput="checkPw()" autocomplete="new-password">
+          <button type="button" class="pw-toggle" onclick="togglePw('pw-nova')" aria-label="Mostrar senha" title="Mostrar senha" aria-pressed="false" aria-controls="pw-nova">
+            <svg class="pw-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+          </button>
+        </div>
+
+        <div class="pw-strength" id="pw-strength" style="display:none;">
+          <div class="pw-strength-label" id="pw-strength-label">Força: —</div>
+          <div class="pw-strength-bar">
+            <div class="pw-bar-seg" id="seg1"></div>
+            <div class="pw-bar-seg" id="seg2"></div>
+            <div class="pw-bar-seg" id="seg3"></div>
+            <div class="pw-bar-seg" id="seg4"></div>
+          </div>
+        </div>
+
+        <div class="pw-rules">
+          <div class="pw-rule" id="rule-len"><div class="pw-rule-dot"></div>Mínimo de 4 caracteres</div>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label class="form-label">Confirmar nova senha</label>
+        <div class="pw-field">
+          <input class="form-input pw-input" type="password" id="pw-confirm" placeholder="Repita a nova senha" oninput="checkConfirm()" autocomplete="new-password">
+          <button type="button" class="pw-toggle" onclick="togglePw('pw-confirm')" aria-label="Mostrar senha" title="Mostrar senha" aria-pressed="false" aria-controls="pw-confirm">
+            <svg class="pw-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+          </button>
+        </div>
+        <span class="form-hint" id="confirm-hint"></span>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <button class="btn btn-secondary" onclick="resetSenha()">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarSenha()">Salvar nova senha</button>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg"></span></div>
+<script src="../JS/shared.js?v=7"></script>
+<script src="../JS/api.js"></script>
+<script src="../JS/script.js"></script>
+    <script src="../JS/tutorial.js"></script>
+<script src="../JS/scriptminhaconta.js"></script>
+</body>
+</html>

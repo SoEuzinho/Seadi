@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simuladores — Diversões</title>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/estilominhaconta.css">
+  <link rel="stylesheet" href="../css/interativo.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <a href="../index.html"><img src="../img/seadi_1.png" alt="Logo SEADI" class="sidebar-logo-img"></a>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-label">Principal</span>
+    <a class="nav-link" href="../index.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 21V12h6v9"/></svg>
+      Página inicial
+    </a>
+    <a class="nav-link" href="progresson1.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Progresso
+    </a>
+    <span class="nav-label">Diversões</span>
+    <a class="nav-link" href="quiz.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16M4 8l6 2M20 8l-6 2"/><path d="M3 16h18"/><path d="M12 16v4"/></svg>
+      Quiz Multiplayer
+      <span class="badge-beta">BETA</span>
+    </a>
+    <a class="nav-link" href="ranking.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8"/></svg>
+      Ranking
+    </a>
+    <a class="nav-link" href="conquistas.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0z"/></svg>
+      Conquistas
+    </a>
+    <a class="nav-link active" href="interativo.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg>
+      Simuladores
+      <span class="badge-beta">BETA</span>
+    </a>
+    <span class="nav-label">Conta</span>
+    <a class="nav-link" href="cadastro.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Dados cadastrais
+    </a>
+    <a class="nav-link" href="criadores.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Criadores
+    </a>
+    <a class="nav-link" href="senha.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Alterar senha
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-link danger" href="#" onclick="logout()">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+      Sair
+    </a>
+  </div>
+</aside>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-left">
+    <button class="hamburger" onclick="toggleSidebar()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="header-title">Simuladores</span>
+  </div>
+
+  <div class="perfil-wrapper">
+    <div class="profile-trigger" id="btn-menu-perfil">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-pequeno" alt="avatar">
+      <span id="display-nome-curto">Usuário</span>
+      <i class="arrow-icon">▼</i>
+    </div>
+    <div id="idMenuPerfil" class="menu-premium">
+      <a href="cadastro.html">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Minha Conta
+      </a>
+      <a href="#" onclick="logout()" class="btn-logout">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+        Sair da Plataforma
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== CONTEÚDO ===== -->
+<main class="main">
+  <div class="page-header">
+    <h1>Simuladores interativos</h1>
+    <p>Pratique com o mouse, o teclado e as janelas do computador — sem medo de errar.</p>
+  </div>
+
+  <div class="sim-overview">
+    <span class="sim-overview-text" id="sim-overview-text" aria-live="polite">0 de 7 simuladores concluídos</span>
+    <div class="sim-overview-bar"><div class="sim-overview-fill" id="sim-overview-fill"></div></div>
+  </div>
+
+  <!-- ===== 1. LIGAR/DESLIGAR ===== -->
+  <section class="sim" id="sim-ligar" data-slug="ligar">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Ligar e desligar o computador</h2>
+        <p>Pressione o botão de energia e acompanhe o computador ligar e desligar.</p>
+      </div>
+      <span class="sim-badge" id="badge-ligar">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="sim-layout">
+        <div class="monitor">
+          <div class="screen" id="screen">
+            <div class="screen-off" id="screen-off">Aperte o botão de energia para ligar</div>
+            <div class="screen-boot" id="screen-boot">
+              <div class="boot-logo">SEADI</div>
+              <div class="boot-dots"><span></span><span></span><span></span></div>
+            </div>
+            <div class="screen-desktop" id="screen-desktop">
+              <div class="desk-icons">
+                <div class="desk-icon">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></svg>
+                  <span>Computador</span>
+                </div>
+                <div class="desk-icon">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+                  <span>Documentos</span>
+                </div>
+                <div class="desk-icon">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                  <span>Lixeira</span>
+                </div>
+              </div>
+              <div class="desk-taskbar">
+                <span class="tb-start">Iniciar</span>
+                <span class="tb-clock">10:30</span>
+              </div>
+            </div>
+          </div>
+          <div class="monitor-stand"></div>
+          <div class="monitor-base"></div>
+        </div>
+        <div class="sim-controls">
+          <button class="sim-btn power-btn" id="power-btn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+            Botão de Energia
+          </button>
+          <div class="sim-steps">
+            <span class="sim-step" data-step="ligar">Ligar o computador</span>
+            <span class="sim-step" data-step="desligar">Desligar o computador</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. MOUSE ===== -->
+  <section class="sim" id="sim-mouse" data-slug="mouse">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M6 11h12"/><path d="M12 3v4"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Usando o mouse</h2>
+        <p>Clique nos botões do mouse e veja o que acontece na tela ao lado.</p>
+      </div>
+      <span class="sim-badge" id="badge-mouse">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="sim-layout">
+        <div class="mouse-stage">
+          <div class="preview-window">
+            <div class="pw-titlebar">Meus Arquivos</div>
+            <div class="pw-content" id="pw-content">
+              <div class="pw-item" data-file="Fotos">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 15l-5-5-8 8"/></svg>
+                <span>Fotos</span>
+              </div>
+              <div class="pw-item" data-file="Documento.txt">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                <span>Documento.txt</span>
+              </div>
+              <div class="pw-item" data-file="Planilha">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                <span>Planilha</span>
+              </div>
+              <div class="pw-item" data-file="Música">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <span>Música</span>
+              </div>
+              <div class="pw-item" data-file="Vídeo">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+                <span>Vídeo</span>
+              </div>
+              <div class="pw-item" data-file="Ensinando">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+                <span>Ensinando</span>
+              </div>
+              <div class="pw-item" data-file="Imagens">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-8 8"/></svg>
+                <span>Imagens</span>
+              </div>
+              <div class="pw-item" data-file="Jogos">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg>
+                <span>Jogos</span>
+              </div>
+              <div class="mouse-cursor" id="mouse-cursor">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M4 2l7 19 2.6-6.7L20 12 4 2z"/></svg>
+              </div>
+              <div class="context-menu" id="context-menu">
+                <button type="button">Copiar</button>
+                <button type="button">Colar</button>
+                <button type="button">Excluir</button>
+              </div>
+              <div class="open-file" id="open-file" role="status" aria-live="polite">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                <span id="open-file-name">Arquivo aberto</span>
+              </div>
+            </div>
+          </div>
+          <div class="mouse">
+            <div class="mouse-scroll" id="mouse-scroll"></div>
+            <div class="mouse-left" id="mouse-left"><span>Clique esquerdo</span></div>
+            <div class="mouse-right" id="mouse-right"><span>Clique direito</span></div>
+          </div>
+        </div>
+        <div class="sim-steps">
+          <span class="sim-step" data-step="esquerdo">Clique esquerdo</span>
+          <span class="sim-step" data-step="direito">Clique direito</span>
+          <span class="sim-step" data-step="scroll">Usar o scroll</span>
+          <span class="sim-step" data-step="duplo">Duplo clique</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. TECLADO ===== -->
+  <section class="sim" id="sim-teclado" data-slug="teclado">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6.01" y2="10"/><line x1="10" y1="10" x2="10.01" y2="10"/><line x1="14" y1="10" x2="14.01" y2="10"/><line x1="18" y1="10" x2="18.01" y2="10"/><line x1="6" y1="14" x2="18" y2="14"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Usando o teclado</h2>
+        <p>Clique nas teclas e veja o texto aparecer. Teste o Shift, o Caps Lock e o Backspace.</p>
+      </div>
+      <span class="sim-badge" id="badge-teclado">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="type-area">
+        <textarea id="kb-screen" readonly rows="4" placeholder="Clique nas teclas abaixo para digitar aqui..."></textarea>
+        <div class="kb-status" id="kb-status" aria-live="polite">Caps Lock: desligado</div>
+      </div>
+      <div class="keyboard" id="keyboard"></div>
+      <div class="sim-steps">
+        <span class="sim-step" data-step="letra">Digitar uma letra</span>
+        <span class="sim-step" data-step="espaco">Usar o Espaço</span>
+        <span class="sim-step" data-step="enter">Pressionar Enter</span>
+        <span class="sim-step" data-step="backspace">Usar o Backspace</span>
+        <span class="sim-step" data-step="shift">Usar o Shift</span>
+        <span class="sim-step" data-step="caps">Usar o Caps Lock</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. JANELAS ===== -->
+  <section class="sim" id="sim-janelas" data-slug="janelas">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Janelas do Windows</h2>
+        <p>Experimente minimizar, maximizar e fechar a janela usando os botões da barra de título.</p>
+      </div>
+      <span class="sim-badge" id="badge-janelas">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="fake-desktop" id="fake-desktop">
+        <div class="win" id="win">
+          <div class="win-titlebar">
+            <span class="win-title">Bloco de Notas</span>
+            <div class="win-controls">
+              <button type="button" class="wc" id="win-min" title="Minimizar" aria-label="Minimizar janela">–</button>
+              <button type="button" class="wc" id="win-max" title="Maximizar" aria-label="Maximizar janela">□</button>
+              <button type="button" class="wc wc-close" id="win-close" title="Fechar" aria-label="Fechar janela">×</button>
+            </div>
+          </div>
+          <div class="win-body">
+            <p>Esta é uma janela de programa. Use os botões no canto superior direito:</p>
+            <p><strong>–</strong> minimiza &nbsp; <strong>□</strong> maximiza &nbsp; <strong>×</strong> fecha</p>
+          </div>
+        </div>
+        <div class="fake-taskbar">
+          <button type="button" class="task-item" id="task-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+            Bloco de Notas
+          </button>
+          <button type="button" class="reopen-btn" id="reopen-btn">Abrir novamente</button>
+        </div>
+      </div>
+      <div class="sim-steps">
+        <span class="sim-step" data-step="minimizar">Minimizar a janela</span>
+        <span class="sim-step" data-step="maximizar">Maximizar a janela</span>
+        <span class="sim-step" data-step="fechar">Fechar a janela</span>
+        <span class="sim-step" data-step="reabrir">Reabrir a janela</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. INTERNET E REDES ===== -->
+  <section class="sim" id="sim-redes" data-slug="redes">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Internet e redes</h2>
+        <p>Monte sua conexão: do computador ao modem, do provedor até os servidores na rede global.</p>
+      </div>
+      <span class="sim-badge" id="badge-redes">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="net-stage">
+        <div class="net-flow">
+          <button type="button" class="net-node" id="net-pc">
+            <span class="net-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </span>
+            <span class="net-label">Computador</span>
+            <span class="net-state" data-state="off">sem cabo</span>
+          </button>
+
+          <div class="net-link" id="link-pc">
+            <span class="net-line"></span>
+            <span class="net-link-label">Cabo de rede</span>
+          </div>
+
+          <button type="button" class="net-node" id="net-modem">
+            <span class="net-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M7 13h.01M11 13h.01M15 13h.01M19 13h.01"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2"/><path d="M9 19v2M15 19v2"/></svg>
+            </span>
+            <span class="net-label">Modem / Roteador</span>
+            <span class="net-state" data-state="off">desligado</span>
+          </button>
+
+          <div class="net-link" id="link-isp">
+            <span class="net-line"></span>
+            <span class="net-link-label">Linha do provedor</span>
+          </div>
+
+          <button type="button" class="net-node" id="net-isp">
+            <span class="net-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 10h16M8 10v11M16 10v11M4 21h16"/><path d="M12 3l3 4H9l3-4z"/></svg>
+            </span>
+            <span class="net-label">Provedor de Internet</span>
+            <span class="net-state" data-state="on">conectado</span>
+          </button>
+
+          <div class="net-link" id="link-global">
+            <span class="net-line"></span>
+            <span class="net-link-label">Fibra óptica</span>
+          </div>
+
+          <button type="button" class="net-node" id="net-global">
+            <span class="net-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            </span>
+            <span class="net-label">Rede Global</span>
+            <span class="net-state" data-state="off">sem conexão</span>
+          </button>
+        </div>
+
+        <div class="net-servers">
+          <button type="button" class="net-node net-server" id="net-site">
+            <span class="net-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/><path d="M9 12l2 3 4-5"/></svg>
+            </span>
+            <span class="net-label">Servidor de Site</span>
+            <span class="net-state" data-state="off">offline</span>
+          </button>
+          <div class="net-link" id="link-site">
+            <span class="net-line"></span>
+            <span class="net-link-label">Servidores de sites</span>
+          </div>
+          <button type="button" class="net-node net-server" id="net-game">
+            <span class="net-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg>
+            </span>
+            <span class="net-label">Servidor de Jogos</span>
+            <span class="net-state" data-state="off">offline</span>
+          </button>
+          <div class="net-link" id="link-game">
+            <span class="net-line"></span>
+            <span class="net-link-label">Partidas online</span>
+          </div>
+        </div>
+
+        <div class="net-status" id="net-status">
+          <span class="net-status-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </span>
+          <div class="net-status-body" aria-live="polite">
+            <strong class="net-status-titulo" id="net-status-titulo">Comece pela rede local</strong>
+            <p class="net-status-texto" id="net-status-texto">
+              Clique no computador para conectar o cabo de rede. Acompanhe o caminho da internet até chegar aos servidores.
+            </p>
+            <span class="net-status-dica" id="net-status-dica">Dica: siga a ordem indicada pelos passos lá embaixo.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="net-glossario">
+        <h3 class="net-glossario-title">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Entenda cada parte da internet
+        </h3>
+        <div class="net-glossario-grid">
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+            <strong>Rede Local (LAN)</strong>
+            <p>A rede de <em>dentro</em> da sua casa: computador, celular, TV — todos conectados ao mesmo roteador, conversando entre si.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2"/></svg></span>
+            <strong>Modem / Roteador</strong>
+            <p>O <em>modem</em> recebe a internet do provedor e o <em>roteador</em> distribui esse sinal para os aparelhos da casa.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 10h16M8 10v11M16 10v11M4 21h16"/><path d="M12 3l3 4H9l3-4z"/></svg></span>
+            <strong>Provedor (ISP)</strong>
+            <p>A empresa que <em>entrega</em> a internet até a sua casa — normalmente por cabo ou fibra óptica.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></span>
+            <strong>Rede Global</strong>
+            <p>Depois do provedor, sua conexão entra na <em>internet</em>: milhões de redes interligadas no mundo inteiro.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/><path d="M9 12l2 3 4-5"/></svg></span>
+            <strong>Servidor de Site</strong>
+            <p>Computador <em>sempre ligado</em> que guarda as páginas. Ao abrir um site, seu computador pede os dados ao servidor.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg></span>
+            <strong>Servidor de Jogos</strong>
+            <p>O <em>árbitro</em> da partida online: recebe as ações de cada jogador e manda para todos os outros.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7z"/><path d="M14 12h4M6 16h12"/></svg></span>
+            <strong>Pacotes de dados</strong>
+            <p>A internet viaja em <em>pacotinhos</em> de informação. Cada pacote sai do seu computador e vai saltando até o destino.</p>
+          </div>
+          <div class="gloss-card">
+            <span class="gloss-icone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2L12 3z"/></svg></span>
+            <strong>Endereço IP</strong>
+            <p>Cada aparelho tem um <em>endereço único</em> (o IP) na rede — igual ao número da sua casa — para os dados chegarem no lugar certo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sim-steps">
+        <span class="sim-step" data-step="cabo">Conectar o cabo de rede</span>
+        <span class="sim-step" data-step="modem">Ligar o modem</span>
+        <span class="sim-step" data-step="provedor">Conectar ao provedor</span>
+        <span class="sim-step" data-step="global">Entrar na rede global</span>
+        <span class="sim-step" data-step="site">Abrir um site</span>
+        <span class="sim-step" data-step="jogos">Entrar no servidor de jogos</span>
+      </div>
+    </div>
+  </section>
+  <!-- ===== 6. PEN DRIVE ===== -->
+  <section class="sim" id="sim-pendrive" data-slug="pendrive">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M9 2v3M15 2v3"/><path d="M12 11v2"/><circle cx="12" cy="16" r="1"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Usando pen drive</h2>
+        <p>Copie arquivos para o pen drive e ejete-o com segurança antes de retirar.</p>
+      </div>
+      <span class="sim-badge" id="badge-pendrive">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="pd-stage">
+        <div class="pd-table">
+          <div class="pd-cpu" id="pd-cpu">
+            <span class="pd-cpu-label">Computador</span>
+            <button type="button" class="pd-usbport" id="pd-usbport" title="Porta USB">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="9" rx="2"/><path d="M9 11v7a2 2 0 002 2h2a2 2 0 002-2v-7"/></svg>
+              USB
+            </button>
+          </div>
+          <button type="button" class="pd-stick" id="pd-stick" title="Pen drive">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M10 8h4"/><circle cx="12" cy="16" r="1"/></svg>
+            <span>Pen drive</span>
+          </button>
+        </div>
+        <div class="pd-explorer hidden" id="pd-explorer">
+          <div class="pd-explorer-bar">
+            <span class="pd-explorer-title">Explorador de Arquivos</span>
+            <span class="pd-explorer-path" id="pd-path">Este Computador</span>
+          </div>
+          <div class="pd-explorer-body">
+            <div class="pd-nav">
+              <button type="button" class="pd-drive active" data-drive="c">Disco Local (C:)</button>
+              <button type="button" class="pd-drive hidden" id="pd-drive-stick" data-drive="e">Pen Drive (E:)</button>
+            </div>
+            <div class="pd-files" id="pd-files"></div>
+          </div>
+        </div>
+        <div class="pd-status" id="pd-status" aria-live="polite">Clique no pen drive para pegá-lo.</div>
+      </div>
+      <div class="sim-controls">
+        <button type="button" class="sim-btn" id="pd-copiar" disabled>Copiar arquivo</button>
+        <button type="button" class="sim-btn" id="pd-ejetar" disabled>Ejetar com segurança</button>
+        <div class="sim-steps">
+          <span class="sim-step" data-step="pegar">Pegar o pen drive</span>
+          <span class="sim-step" data-step="encaixar">Encaixar na porta USB</span>
+          <span class="sim-step" data-step="copiar">Copiar um arquivo</span>
+          <span class="sim-step" data-step="colar">Colar no pen drive</span>
+          <span class="sim-step" data-step="ejetar">Ejetar com segurança</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. NAVEGAR NA INTERNET ===== -->
+  <section class="sim" id="sim-navegador" data-slug="navegador">
+    <div class="sim-head">
+      <div class="sim-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      </div>
+      <div class="sim-head-text">
+        <h2>Navegando na internet</h2>
+        <p>Abra o navegador, digite o endereço e explore as páginas com voltar, recarregar e novas abas.</p>
+      </div>
+      <span class="sim-badge" id="badge-navegador">Concluído</span>
+    </div>
+    <div class="sim-body">
+      <div class="nb-window" id="nb-window">
+        <div class="nb-titlebar">
+          <span class="nb-dot"></span><span class="nb-dot"></span><span class="nb-dot"></span>
+          <span class="nb-title" id="nb-title" aria-live="polite">SEADI — Portal de Aulas</span>
+        </div>
+        <div class="nb-toolbar">
+          <button type="button" class="nb-btn" id="nb-back" title="Voltar" aria-label="Voltar" disabled>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <button type="button" class="nb-btn" id="nb-reload" title="Recarregar" aria-label="Recarregar" disabled>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          </button>
+          <input class="nb-address" id="nb-address" value="seadi.com.br" spellcheck="false" disabled />
+        </div>
+        <div class="nb-tabs" id="nb-tabs">
+          <span class="nb-tab active">SEADI — Portal de Aulas</span>
+          <button type="button" class="nb-add" id="nb-add" title="Nova aba" aria-label="Nova aba" disabled>+</button>
+        </div>
+        <div class="nb-page" id="nb-page">
+          <div class="nb-start" id="nb-start">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            <button type="button" class="sim-btn" id="nb-open">Abrir o navegador</button>
+          </div>
+        </div>
+      </div>
+      <div class="sim-steps">
+        <span class="sim-step" data-step="abrir">Abrir o navegador</span>
+        <span class="sim-step" data-step="endereco">Clicar na barra de endereço</span>
+        <span class="sim-step" data-step="entrar">Pressionar Enter</span>
+        <span class="sim-step" data-step="link">Clicar em um link</span>
+        <span class="sim-step" data-step="voltar">Usar o botão Voltar</span>
+        <span class="sim-step" data-step="atualizar">Recarregar a página</span>
+        <span class="sim-step" data-step="aba">Abrir uma nova aba</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Toast + confete -->
+<div class="sim-toast" id="sim-toast" role="status" aria-live="polite"></div>
+<div class="confetti-burst" id="confetti-burst"></div>
+
+<script src="../JS/shared.js?v=7"></script>
+<script src="../JS/api.js"></script>
+<script src="../JS/script.js"></script>
+<script src="../JS/interativo.js"></script>
+</body>
+</html>

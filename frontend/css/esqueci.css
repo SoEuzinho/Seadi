@@ -1,0 +1,69 @@
+/* Esqueci Senha - Estilos adicionais (base: estilos (1).css) */
+
+.auth-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* ── Abas: E-mail / Telefone ── */
+.tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-borda-soft);
+    border-radius: 18px;
+    padding: 4px;
+    margin-bottom: 24px;
+    gap: 4px;
+}
+
+.tab {
+    flex: 1;
+    height: 40px;
+    border: none;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.tab.active {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--action-blue);
+}
+
+.tab:hover:not(.active) {
+    color: var(--text-pure);
+}
+
+/* ── Painéis de cada aba ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.tab-panel .login-form {
+    gap: 16px;
+}
+
+.tab-panel .btn-login {
+    margin-top: 5px;
+}
+
+/* ── Mensagem de sucesso ── */
+.success-box {
+    display: none;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 18px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #10b981;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.success-box.show { display: block; }

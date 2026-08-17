@@ -1,0 +1,426 @@
+/* ==========================================================================
+   CRIADORES — Área de créditos do SEADI
+   Visual: créditos cinematográficos de jogo/filme, leve (transform/opacity/
+   filter apenas). Ao final da introdução, os 16 nomes permanecem visíveis.
+   Respeita prefers-reduced-motion.
+   ========================================================================== */
+
+.credits {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 0 56px;
+}
+
+/* ── Botão voltar (padrão visual do SEADI: arredondado + glow) ── */
+.credits-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  background: var(--brand);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, background 0.3s ease;
+}
+.credits-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+  background: var(--brand-dark);
+}
+.credits-back:active { transform: translateY(0) scale(0.98); }
+
+/* ── Hero / título ── */
+.credits-hero {
+  text-align: center;
+  padding: 30px 0 6px;
+}
+.credits-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.credits-title {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 15%, var(--brand) 70%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(14, 165, 233, 0.35));
+}
+.credits-subtitle {
+  margin-bottom: 26px;
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.credits-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.credits-rule::before,
+.credits-rule::after {
+  content: "";
+  width: 60px;
+  max-width: 18vw;
+  height: 1px;
+}
+.credits-rule::before { background: linear-gradient(90deg, transparent, var(--brand)); }
+.credits-rule::after  { background: linear-gradient(90deg, var(--brand), transparent); }
+.credits-rule span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 12px var(--brand);
+}
+
+/* ── Grade de nomes ── */
+.credits-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.credits-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 20px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  font-size: clamp(1.02rem, 2.6vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  overflow: hidden;
+  cursor: pointer;
+}
+.credits-item:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.credits-item::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0.9;
+}
+.ci-name {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES TEMÁTICAS POR CARGO (uma vez, leves)
+   ========================================================================== */
+
+/* Líder de Front-end: varredura de cor no nome */
+.fx-shimmer .ci-name {
+  background: linear-gradient(110deg, #fff 35%, #7dd3fc 45%, #c7d2fe 50%, #fff 60%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.fx-shimmer.fx-run .ci-name { animation: fxShimmer 1.2s linear 1; }
+@keyframes fxShimmer {
+  from { background-position: 120% 0; }
+  to   { background-position: -120% 0; }
+}
+
+/* Especialista em Usabilidade: cursor de escrita (o JS digita rápido) */
+.typing-caret {
+  display: inline-block;
+  margin-left: 1px;
+  color: var(--brand);
+  animation: caretBlink 0.5s steps(1) infinite;
+}
+
+/* Back-end: cursor de terminal pisca e some */
+.fx-caret .ci-name::after {
+  content: "▍";
+  margin-left: 2px;
+  color: var(--brand);
+  opacity: 0;
+}
+.fx-caret.fx-run .ci-name::after { animation: caretBlink 1.4s linear 1 both; }
+@keyframes caretBlink {
+  0%, 100% { opacity: 0; }
+  20% { opacity: 1; }
+  40% { opacity: 0; }
+  60% { opacity: 1; }
+  80% { opacity: 1; }
+}
+
+/* Líder de Projeto: nome "montado" letra por letra */
+.fx-letters .ci-name span,
+.fx-drop .ci-name span {
+  display: inline-block;
+  opacity: 0;
+}
+.fx-letters .ci-name span { transform: translateY(14px) scale(0.5); }
+.fx-drop .ci-name span   { transform: translateY(-18px); }
+.fx-letters.in .ci-name span,
+.fx-drop.in .ci-name span {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Modal de cargo/função (abre ao clicar/tocar no nome) ── */
+.credits-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.credits-modal.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+.cm-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 15, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.cm-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 26px 26px;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(14, 165, 233, 0.12);
+  transform: translateY(18px) scale(0.94);
+  opacity: 0;
+  filter: blur(6px);
+  transition: transform 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.3), opacity 0.3s ease, filter 0.3s ease;
+}
+.credits-modal.open .cm-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  filter: blur(0);
+}
+.cm-kicker {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 12px;
+}
+.cm-nome {
+  margin: 0 0 8px;
+  font-size: clamp(1.3rem, 5vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.cm-cargo {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--brand), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.cm-desc {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.cm-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.cm-close:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* ── Estado de introdução (JS adiciona .intro; sem ela tudo fica visível) ── */
+#credits.intro .credits-item {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(26px) scale(0.96);
+}
+#credits.intro .credits-item.in {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0) scale(1);
+  transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#credits.intro .credits-title {
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(0.96);
+}
+#credits.intro .credits-title.in {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+  transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease;
+}
+#credits.intro .credits-subtitle {
+  opacity: 0;
+  transform: translateY(8px);
+}
+#credits.intro .credits-subtitle.in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+}
+#credits.intro .credits-rule { opacity: 0; }
+#credits.intro .credits-rule.in { opacity: 1; transition: opacity 0.5s ease; }
+#credits.intro .credits-count { opacity: 0; }
+#credits.intro .credits-count.in { opacity: 1; transition: opacity 0.6s ease; }
+
+.credits-count {
+  margin-top: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Interação desktop (apenas quando há hover) ── */
+@media (hover: hover) and (pointer: fine) {
+  .credits-item {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s ease,
+      box-shadow 0.35s ease, background 0.35s ease;
+  }
+  .credits-item:hover {
+    transform: translateY(-4px) scale(1.03);
+    border-color: rgba(14, 165, 233, 0.55);
+    background: rgba(14, 165, 233, 0.1);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.25);
+  }
+  .credits-item:hover::after { transform: scaleX(1); }
+}
+.credits-item:active { transform: scale(0.98); }
+
+/* ── Partículas leves (só durante a introdução, sem loop) ── */
+.credits-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.credits-bg i {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.9), rgba(99, 102, 241, 0));
+  animation: creditsFloat var(--d, 3s) ease-in both;
+}
+@keyframes creditsFloat {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  15%  { opacity: 0.85; }
+  100% { transform: translateY(-110vh) translateX(var(--dx, 0px)); opacity: 0; }
+}
+.credits.settled .credits-bg { display: none; }
+
+/* ── Responsividade ── */
+@media (max-width: 1023px) {
+  .credits-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .credits-list { grid-template-columns: 1fr; gap: 12px; }
+  .credits-item { justify-content: flex-start; padding: 16px 14px; }
+  .credits-hero { padding-top: 18px; }
+  .credits-back { padding: 9px 18px; font-size: 13px; }
+  .credits-count { margin-top: 24px; }
+}
+
+/* ── Redução de movimento: sem animações, tudo visível ── */
+@media (prefers-reduced-motion: reduce) {
+  .credits-bg { display: none; }
+  .credits-item,
+  .credits-title,
+  .credits-subtitle,
+  .credits-rule,
+  .credits-count {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .credits-item::after { display: none; }
+  .credits-modal,
+  .cm-card {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .fx-shimmer .ci-name,
+  .fx-caret .ci-name,
+  .fx-letters .ci-name span,
+  .fx-drop .ci-name span {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .typing-caret { display: none; }
+}

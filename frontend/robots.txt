@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /minha-conta/
+Disallow: /modulos/
+Disallow: /pasta-modulos/
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /admin
+Disallow: /phpmyadmin
+
+Sitemap: https://seadi.sostudio.uk/sitemap.xml

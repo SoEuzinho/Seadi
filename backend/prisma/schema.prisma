@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id              Int                @id @default(autoincrement())
+  nome            String
+  email           String             @unique
+  senha           String
+  telefone        String?
+  dataNascimento  DateTime?
+  fotoUrl         String?
+  tokenVersion    Int                @default(0)
+  ultimoAcesso    DateTime?
+  criadoEm        DateTime           @default(now())
+  atualizadoEm    DateTime           @updatedAt
+
+  progressoModulos  ProgressoModulo[]
+  progressoAulas    ProgressoAula[]
+  tentativasLogin   TentativaLogin[]
+  atividades        Atividade[]
+  partidasQuiz      PartidaQuiz[]
+  conquistas        Conquista[]
+
+}
+
+model Modulo {
+  id          Int              @id @default(autoincrement())
+  ordem       Int              @unique
+  titulo      String
+  descricao   String?
+  icone       String?
+
+  aulas       Aula[]
+  progresso   ProgressoModulo[]
+}
+
+model Aula {
+  id          Int              @id @default(autoincrement())
+  moduloId    Int
+  ordem       Int
+  titulo      String
+  descricao   String?
+  videoUrl    String?
+  conteudo    String?
+  duracao     Int?
+
+  modulo      Modulo           @relation(fields: [moduloId], references: [id], onDelete: Cascade)
+  progresso   ProgressoAula[]
+}
+
+model ProgressoModulo {
+  id           Int              @id @default(autoincrement())
+  usuarioId    Int
+  moduloId     Int
+  progresso    Float            @default(0)
+  concluido    Boolean          @default(false)
+  iniciadoEm   DateTime         @default(now())
+  concluidoEm  DateTime?
+
+  usuario      Usuario          @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  modulo       Modulo           @relation(fields: [moduloId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, moduloId])
+}
+
+model ProgressoAula {
+  id             Int              @id @default(autoincrement())
+  usuarioId      Int
+  aulaId         Int
+  videoAssistido Boolean          @default(false)
+  progressoVideo Int              @default(0)
+  tempoAssistido Int              @default(0)
+  concluido      Boolean          @default(false)
+  assistidoEm    DateTime?
+  concluidoEm    DateTime?
+
+  usuario        Usuario          @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  aula           Aula             @relation(fields: [aulaId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, aulaId])
+}
+
+model TentativaLogin {
+  id        Int       @id @default(autoincrement())
+  usuarioId Int?
+  ip        String?
+  momento   DateTime  @default(now())
+  sucesso   Boolean
+
+  usuario   Usuario?  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId, momento])
+  @@index([ip, momento])
+}
+
+model RedefinicaoSenha {
+  id        Int      @id @default(autoincrement())
+  email     String
+  codigo    String   // hash bcrypt do código de 6 dígitos (nunca em texto plano)
+  tentativas Int     @default(0)
+  expiraEm  DateTime
+  usado     Boolean  @default(false)
+  criadoEm  DateTime @default(now())
+}
+
+model Atividade {
+  id          Int      @id @default(autoincrement())
+  usuarioId   Int
+  tipo        String
+  descricao   String
+  criadoEm    DateTime @default(now())
+
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId, criadoEm])
+}
+
+model Questao {
+  id            Int      @id @default(autoincrement())
+  categoria     String
+  enunciado     String
+  alternativaA  String
+  alternativaB  String
+  alternativaC  String
+  correta       Int
+  ativa         Boolean  @default(true)
+  criadoEm      DateTime @default(now())
+
+  @@index([categoria])
+}
+
+model PartidaQuiz {
+  id                  Int      @id @default(autoincrement())
+  usuarioId           Int
+  categoria           String
+  posicao             Int
+  pontos              Int
+  acertos             Int
+  erros               Int
+  tempoMedioResposta  Float
+  percentualAcertos   Float
+  totalPerguntas      Int
+  concluidaEm         DateTime @default(now())
+
+  usuario             Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId, concluidaEm])
+}
+
+model Conquista {
+  id          Int      @id @default(autoincrement())
+  usuarioId   Int
+  slug        String
+  obtidaEm    DateTime @default(now())
+
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, slug])
+}
+
+

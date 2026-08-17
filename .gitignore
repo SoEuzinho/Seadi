@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+**/dist/
+**/.next/
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Uploads and runtime files
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+docker-compose.override.yml
+
+# OS files
+.DS_Store
+Thumbs.db

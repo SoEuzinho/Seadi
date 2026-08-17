@@ -1,0 +1,928 @@
+/* ==========================================================================
+   PALETA DE CORES SISTEMATIZADA
+   ========================================================================== */
+:root {
+    /* Tons Neutros e Fundo */
+    --bg-base: #1a1c23;            /* Fundo escuro elegante de base */
+    --text-pure: #ffffff;
+    --text-muted: #94a3b8;         /* Cinza azulado para textos secundários */
+    --text-divider: rgba(63, 77, 97, 0.3);
+    --text-dark: #1e293b;          /* Textos escuros para menus internos */
+
+/* Efeito Glassmorphism e Transparência (Corrigido para tons neutros) */
+    --glass-fundo-card: rgba(20, 25, 35, 0.25);      /* Vidro fosco escuro/neutro */
+    --glass-borda-card: rgba(255, 255, 255, 0.15);   /* Borda cristalina principal */
+    --glass-borda-soft: rgba(255, 255, 255, 0.08); 
+    --bg-input-disabled: rgba(255, 255, 255, 0.05);
+
+    /* Cores de Ação (Neon Glow) */
+    --action-blue: #0ea5e9;
+    --action-indigo: #6366f1;
+    --hover-link: #38bdf8;
+
+    /* Aliases para compatibilidade com as demais páginas do sistema
+       (cadastro, criarconta, esqueci, estilominhaconta, privacidade,
+       progresso, termos), que usam esses mesmos nomes de variável. */
+    --brand: var(--action-blue);
+    --brand-light: rgba(14, 165, 233, 0.14);
+    --brand-dark: var(--hover-link);
+    --accent: var(--action-indigo);
+    --text-primary: var(--text-pure);
+    --text-secondary: var(--text-muted);
+    --bg-page: var(--bg-base);
+    --bg-card: #21242c;
+    --border: var(--glass-borda-soft);
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --success: #10b981;
+
+}
+
+/* ==========================================================================
+   FUNDAMENTOS E RESETS (Prevenção de Bugs)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-base);
+    color: var(--text-pure);
+    position: relative;
+    -webkit-font-smoothing: antialiased; /* Deixa a fonte mais fina e nítida */
+}
+
+
+
+.arrow-icon {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    margin-left: 5px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   HEADER PREMIUM
+   ========================================================================== */
+.header-elite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+    background: rgba(11, 15, 26, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-borda-soft);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-box img {
+    height: 60px;
+    filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.2));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-box img:hover {
+    filter: drop-shadow(0 0 25px rgba(14, 165, 233, 0.5));
+    transform: scale(1.02);
+}
+
+/* --- PERFIL --- */
+.perfil-wrapper {
+    position: relative;
+}
+
+.profile-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 16px 6px 6px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--action-blue);
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+}
+
+.profile-trigger img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: border-color 0.3s;
+}
+
+.profile-trigger:hover img {
+    border-color: var(--action-blue);
+}
+
+.profile-trigger span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-pure);
+    letter-spacing: 0.3px;
+}
+
+.arrow-icon {
+    font-size: 0.6rem;
+    opacity: 0.6;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    color: var(--text-pure);
+}
+
+.profile-trigger:hover .arrow-icon {
+    opacity: 1;
+}
+
+/* --- Menu dropdown escuro --- */
+.menu-premium {
+    position: absolute;
+    right: 0;
+    top: 56px;
+    width: 260px;
+    max-width: calc(100vw - 24px);
+    background: rgba(20, 25, 35, 0.95);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(14, 165, 233, 0.05);
+    display: none;
+    z-index: 9999;
+    transform-origin: top right;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu-premium.open {
+    display: block;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.95) translateY(-8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.menu-premium a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.menu-premium a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.menu-premium a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.menu-premium a:hover svg {
+    opacity: 1;
+}
+
+.btn-logout {
+    color: #ef4444 !important;
+    font-weight: 600;
+}
+
+.btn-logout svg {
+    color: #ef4444;
+    opacity: 1 !important;
+}
+
+.btn-logout:hover {
+    background: rgba(239, 68, 68, 0.12) !important;
+    color: #f87171 !important;
+}
+
+.btn-account {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--action-blue);
+    border: 1px solid transparent;
+}
+
+.btn-account:hover {
+    background-color: var(--hover-link);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+/* ── Botão "Próxima Página" ──
+   Fica SEMPRE visível; desabilitado (visual) até o vídeo ser concluído.
+   O JS adiciona a classe .enabled ao término da aula. */
+.btn-next-lesson {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: saturate(0.4);
+    transition: opacity 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease, filter 0.4s ease;
+}
+
+.btn-next-lesson.enabled {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;
+    filter: none;
+    animation: nextPulseIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-next-lesson.enabled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+}
+
+@keyframes nextPulseIn {
+    from { transform: scale(0.92); opacity: 0.5; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL (Glassmorphism Blindado)
+   ========================================================================== */
+.glass-shell {
+    flex: 1;
+    background: var(--glass-fundo-card);
+    border: 1px solid var(--glass-borda-card);
+    border-radius: 40px;
+    padding: 60px 40px;
+    margin: 40px auto;
+    width: 92%;
+    max-width: 1200px;
+    height: auto; /* Impede o texto de vazar */
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10;
+    /* Sombra elegante ao redor do container inteiro */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 20%, var(--action-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 15px rgba(14, 165, 233, 0.15));
+    letter-spacing: -1px;
+}
+
+/* Título das páginas de aula (usa a classe base hero-title) */
+.lesson-title {
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+    overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   GRID E CARDS DE MÓDULOS
+   ========================================================================== */
+.grid-premium {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    padding: 10px;
+}
+
+.card-elite {
+    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+    border: 1px solid var(--glass-borda-soft);
+    border-radius: 30px;
+    padding: 20px;
+    text-decoration: none !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Efeito de "Flash" ao passar o mouse */
+.card-elite::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.08), transparent);
+    transform: rotate(45deg);
+    transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.card-elite:hover::after {
+    left: 100%;
+    top: 100%;
+}
+
+.card-elite:hover {
+    transform: translateY(-10px);
+    border-color: var(--hover-link);
+    background: rgba(255, 255, 255, 0.08);
+    /* Sombras em camadas para o efeito "flutuante" */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 20px 40px rgba(14, 165, 233, 0.15);
+}
+
+.card-elite h3 {
+    color: #fff;
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.thumb-img {
+    width: 100%;
+    border-radius: 20px;
+    filter: saturate(1.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-elite:hover .thumb-img {
+    transform: scale(1.03);
+    filter: saturate(1.3) brightness(1.1);
+}
+
+/* ── Card bloqueado ── */
+.card-elite.locked {
+    pointer-events: none;
+    opacity: 0.5;
+    position: relative;
+}
+
+.card-elite.locked img,
+.card-elite.locked h3,
+.card-elite.locked .mod-progress-text {
+    filter: blur(5px);
+}
+
+.card-elite.locked::before {
+    content: "🔒";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    z-index: 2;
+    pointer-events: none;
+    filter: none;
+}
+
+.card-elite.locked:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--glass-borda-soft);
+}
+
+/* ── Card concluído ── */
+.card-elite.done {
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.card-elite.done::after {
+    content: "";
+}
+
+/* ── Card em progresso ── */
+.card-elite.in-progress {
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.card-elite.in-progress::after {
+    content: "▶";
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 1.2rem;
+    filter: none;
+    z-index: 2;
+    pointer-events: none;
+    color: #6366F1;
+}
+
+/* ==========================================================================
+   VIDEO RESPONSIVO
+   ========================================================================== */
+.video-wrapper {
+    width: 100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border 0.5s ease, box-shadow 0.5s ease;
+    border: 2px solid transparent;
+}
+
+.video-wrapper iframe {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    display: block;
+}
+
+.video-wrapper.concluido {
+    border-color: #10B981;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.35);
+    animation: greenPulse 1.4s ease-out 0.2s;
+}
+
+/* ==========================================================================
+   EFEITO VERDE DE CONCLUSÃO (aula / vídeo / módulo)
+   ========================================================================== */
+
+/* Pulse de anel verde ao concluir */
+@keyframes greenPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+    100% { box-shadow: 0 0 0 30px rgba(16, 185, 129, 0); }
+}
+
+/* Selo de check verde no canto do vídeo */
+.video-check-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 10;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(16, 185, 129, 0.5);
+    opacity: 0;
+    transform: scale(0.3) rotate(-25deg);
+    animation: badgePop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+    pointer-events: none;
+}
+
+.video-check-badge svg {
+    width: 26px;
+    height: 26px;
+}
+
+@keyframes badgePop {
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Flash verde cobrindo a tela */
+.success-flash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 45%, rgba(16, 185, 129, 0.5), rgba(16, 185, 129, 0.14) 55%, transparent 75%);
+    opacity: 0;
+    animation: successFlash 1.1s ease-out forwards;
+}
+
+@keyframes successFlash {
+    0%   { opacity: 0; }
+    15%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Confetes verdes */
+.confetti-burst {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-burst i {
+    position: absolute;
+    top: -20px;
+    display: block;
+    border-radius: 2px;
+    animation: confettiFall 1.8s ease-in infinite;
+}
+
+@keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+/* Banner de módulo: brilho verde pulsante quando concluído agora */
+.module-complete-banner.glow {
+    animation: bannerIn 0.5s ease, bannerGlow 2.2s ease-in-out 0.5s;
+}
+
+@keyframes bannerGlow {
+    0%, 100% { box-shadow: 0 12px 34px rgba(16, 185, 129, 0.14); }
+    50%      { box-shadow: 0 12px 52px rgba(16, 185, 129, 0.5); }
+}
+
+/* Card de aula concluída: selo de check verde */
+.card-elite.done::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #10B981;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.45);
+}
+
+/* ==========================================================================
+   BARRA DE STATUS DO VÍDEO (progresso / vídeo finalizado)
+   ========================================================================== */
+.video-status {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.vs-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--action-blue, #0ea5e9);
+}
+
+.vs-icon svg { width: 17px; height: 17px; }
+
+.vs-text {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+}
+
+.vs-track {
+    flex: 1;
+    min-width: 60px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.vs-bar {
+    position: relative;
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0ea5e9, #6366f1);
+    transition: width 0.5s ease;
+}
+
+.vs-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-100%);
+    animation: vsShine 2s ease-in-out infinite;
+}
+
+@keyframes vsShine {
+    to { transform: translateX(100%); }
+}
+
+.vs-pct {
+    font-weight: 800;
+    min-width: 42px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Estado concluído (100%): tudo fica verde */
+.video-status.done {
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(16, 185, 129, 0.12);
+    box-shadow: 0 6px 26px rgba(16, 185, 129, 0.2);
+}
+
+.video-status.done .vs-icon {
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.5);
+}
+
+.video-status.done .vs-text { color: #6EE7B7; }
+
+.video-status.done .vs-bar {
+    background: linear-gradient(90deg, #10B981, #34D399);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+    animation: donePulse 1.6s ease-in-out infinite;
+}
+
+.video-status.done .vs-bar::after { animation: none; }
+
+.video-status.done .vs-pct { color: #6EE7B7; }
+
+/* Estado de erro do player: aviso em vermelho */
+.video-status.error {
+    border-color: rgba(248, 113, 113, 0.5);
+    background: rgba(248, 113, 113, 0.12);
+    box-shadow: 0 6px 26px rgba(248, 113, 113, 0.2);
+}
+
+.video-status.error .vs-icon {
+    background: rgba(248, 113, 113, 0.2);
+    color: #F87171;
+    box-shadow: none;
+}
+
+.video-status.error .vs-text {
+    color: #FCA5A5;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none;
+    line-height: 1.5;
+}
+
+.video-status.error .vs-track,
+.video-status.error .vs-bar,
+.video-status.error .vs-pct { display: none; }
+
+@keyframes donePulse {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.3); }
+}
+
+/* Celular: barra mais compacta */
+@media (max-width: 576px) {
+    .video-status { gap: 10px; padding: 12px 14px; }
+    .vs-icon { width: 30px; height: 30px; }
+    .vs-text { max-width: 90px; }
+    .vs-pct { min-width: 38px; }
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE MASTER
+   ========================================================================== */
+
+/* TABLETS E TELAS MÉDIAS */
+@media (max-width: 992px) {
+    .header-elite { padding: 20px 40px; }
+    .logo-box img { height: 55px; }
+    .hero-title { font-size: 2.5rem; margin-bottom: 40px; }
+    .glass-shell { padding: 50px 30px; border-radius: 35px; width: 94%; }
+    .grid-premium { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+}
+
+/* CELULARES */
+@media (max-width: 576px) {
+    .header-elite { padding: 15px 20px; }
+    .logo-box img { height: 45px; }
+    .profile-trigger span { display: none; }
+    .profile-trigger { padding: 4px; gap: 0; }
+    .profile-trigger img { width: 35px; height: 35px; }
+    
+    .hero-title { font-size: 2rem; letter-spacing: -0.5px; }
+    .lesson-title { font-size: 1.85rem; margin-bottom: 22px; }
+
+    .glass-shell {
+        padding: 40px 20px;
+        border-radius: 30px;
+        margin: 20px auto;
+        width: 96%;
+    }
+
+    .grid-premium { grid-template-columns: 1fr; gap: 20px; }
+    .card-elite { padding: 15px; border-radius: 25px; }
+    .card-elite:hover { transform: translateY(-4px); } /* Suavizado para touch */
+    .thumb-img { border-radius: 15px; }
+
+    /* Botões das páginas de aula empilham no mobile */
+    .glass-shell .btn-account {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* Vídeo maior no celular: ocupa a largura inteira do shell (borda a borda) */
+    .glass-shell .video-wrapper {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+}
+
+/* ── Badge BETA (Quiz Multiplayer) ── */
+.badge-beta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, #f59e0b 0%, #f97316 60%, #ef4444 100%);
+    box-shadow: 0 0 14px rgba(249, 115, 22, 0.45);
+    animation: betaGlow 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes betaGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(249, 115, 22, 0.35); }
+    50%      { box-shadow: 0 0 20px rgba(249, 115, 22, 0.65); }
+}
+
+.menu-premium a .badge-beta {
+    margin-left: auto;
+}
+
+/* ==========================================================================
+   BANNER DE MÓDULO CONCLUÍDO (Parabéns)
+   Só transform/opacity (GPU-friendly), desativado em reduced-motion.
+   ========================================================================== */
+.module-complete-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 26px 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(59, 130, 246, 0.12) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    box-shadow: 0 12px 34px rgba(16, 185, 129, 0.14);
+    animation: bannerIn 0.5s ease;
+}
+
+.module-complete-banner .mcb-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10B981 0%, #0EA5E9 100%);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+}
+
+.module-complete-banner .mcb-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.module-complete-banner .mcb-body {
+    flex: 1;
+    min-width: 200px;
+}
+
+.module-complete-banner .mcb-body h3 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.module-complete-banner .mcb-body p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.module-complete-banner .mcb-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.module-complete-banner .mcb-actions .btn-account {
+    background: var(--action-indigo);
+}
+
+.module-complete-banner .mcb-actions .btn-account.mcb-primary {
+    background: linear-gradient(135deg, #10B981 0%, #0EA5E9 100%);
+    border: none;
+}
+
+@keyframes bannerIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .module-complete-banner,
+    .module-complete-banner.glow { animation: none; }
+    .video-wrapper.concluido,
+    .video-check-badge,
+    .success-flash,
+    .confetti-burst i,
+    .card-elite.done::before,
+    .vs-bar::after,
+    .video-status.done .vs-bar { animation: none !important; }
+    .video-check-badge { opacity: 1; transform: none; }
+    .success-flash { display: none; }
+    .confetti-burst { display: none; }
+}
+
+/* Celular: banner empilhado e centralizado */
+@media (max-width: 576px) {
+    .module-complete-banner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+        padding: 24px 20px;
+    }
+    .module-complete-banner .mcb-icon {
+        width: 58px;
+        height: 58px;
+    }
+    .module-complete-banner .mcb-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+    .module-complete-banner .mcb-body {
+        min-width: 0;
+        width: 100%;
+    }
+    .module-complete-banner .mcb-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    .module-complete-banner .mcb-actions .btn-account {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+   Entrada da página (leve: só transform/opacity, GPU-friendly)
+   ========================================================================== */
+main {
+    animation: pageIn 0.4s ease;
+}
+
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main { animation: none; }
+}

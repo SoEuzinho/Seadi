@@ -1,0 +1,5 @@
+Contact: mailto:suporte.seadi@gmail.com
+Expires: 2027-08-11T00:00:00.000Z
+Preferred-Languages: pt-BR, en
+Canonical: https://seadi.sostudio.uk/.well-known/security.txt
+Policy: https://seadi.sostudio.uk/termos.html

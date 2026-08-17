@@ -1,0 +1,17 @@
+/* ═══ Google Fonts ═══ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ═══ Variáveis de fonte ═══ */
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/* ═══ Aplicação global ═══ */
+*, *::before, *::after {
+  font-family: var(--font-primary);
+}

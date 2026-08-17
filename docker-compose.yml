@@ -1,0 +1,100 @@
+services:
+  db:
+    image: mariadb:11.4
+    container_name: seadi-db
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    ports:
+      # Somente acesso local: banco não deve ficar exposto à internet
+      - "127.0.0.1:3306:3306"
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - seadi-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: seadi-phpmyadmin
+    restart: unless-stopped
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 128M
+
+    ports:
+      # Somente acesso local via túnel seguro; não expor à internet
+      - "127.0.0.1:8080:80"
+
+    networks:
+      - seadi-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: seadi-backend
+    restart: unless-stopped
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+
+      PORT: 5000
+
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: 12h
+
+      SESSION_COOKIE_SECURE: "true"
+
+      RATE_LIMIT_PER_IP: 900
+
+      LOGIN_WINDOW_SECONDS: 900
+      MAX_LOGIN_ATTEMPTS: 5
+      FORGOT_PASSWORD_COOLDOWN_SECONDS: 300
+
+      GMAIL_USER: ${GMAIL_USER}
+      GMAIL_PASS: ${GMAIL_PASS}
+
+      NODE_ENV: production
+
+    ports:
+      # Somente acesso local via túnel (cloudflared acessa localhost:5000)
+      - "127.0.0.1:5000:5000"
+
+    volumes:
+      # Persiste os uploads (fotos de perfil) no host, mantendo o que já
+      # existia em backend/uploads e sobrevivendo a rebuilds do container.
+      - ./backend/uploads:/app/uploads
+
+    networks:
+      - seadi-network
+
+volumes:
+  db_data:
+
+networks:
+  seadi-network:
+    driver: bridge

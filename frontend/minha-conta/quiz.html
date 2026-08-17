@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Multiplayer — Minha Área</title>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/estilominhaconta.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <a href="../index.html"><img src="../img/seadi_1.png" alt="Logo SEADI" class="sidebar-logo-img"></a>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-label">Principal</span>
+    <a class="nav-link" href="../index.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 21V12h6v9"/></svg>
+      Página inicial
+    </a>
+    <a class="nav-link" href="progresson1.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Progresso
+    </a>
+    <span class="nav-label">Diversões</span>
+    <a class="nav-link active" href="quiz.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16M4 8l6 2M20 8l-6 2"/><path d="M3 16h18"/><path d="M12 16v4"/></svg>
+      Quiz Multiplayer
+      <span class="badge-beta">BETA</span>
+    </a>
+    <a class="nav-link" href="ranking.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8"/></svg>
+      Ranking
+    </a>
+    <a class="nav-link" href="conquistas.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0z"/></svg>
+      Conquistas
+    </a>
+    <a class="nav-link" href="interativo.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg>
+      Simuladores
+      <span class="badge-beta">BETA</span>
+    </a>
+    <span class="nav-label">Conta</span>
+    <a class="nav-link" href="cadastro.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Dados cadastrais
+    </a>
+    <a class="nav-link" href="criadores.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Criadores
+    </a>
+    <a class="nav-link" href="senha.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Alterar senha
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-link danger" href="#" onclick="logout()">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+      Sair
+    </a>
+  </div>
+</aside>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-left">
+    <button class="hamburger" onclick="toggleSidebar()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="header-title">Quiz Multiplayer</span>
+  </div>
+
+  <div class="perfil-wrapper">
+    <div class="profile-trigger" id="btn-menu-perfil">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-pequeno" alt="avatar">
+      <span id="display-nome-curto">Usuário</span>
+      <i class="arrow-icon">▼</i>
+    </div>
+    <div id="idMenuPerfil" class="menu-premium">
+      <a href="cadastro.html">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Minha Conta
+      </a>
+      <a href="#" onclick="logout()" class="btn-logout">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+        Sair da Plataforma
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <!-- ── HOME ── -->
+  <section id="view-home" class="quiz-view">
+    <div class="page-header quiz-hero">
+      <div class="quiz-title-row">
+        <h1>Quiz Multiplayer</h1>
+        <span class="badge-beta">BETA</span>
+      </div>
+      <p>Teste seus conhecimentos sobre os assuntos dos módulos do curso em tempo real e dispute o topo do pódio com outros alunos.</p>
+    </div>
+
+    <div class="quiz-section-label">Escolha um módulo para treinar</div>
+    <div id="quiz-categories-loading" class="skeleton-grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+    <div id="quiz-categories" class="quiz-cats"></div>
+
+    <div class="quiz-actions">
+      <button id="btn-entrar" class="btn btn-primary btn-enter" disabled>
+        Ver salas disponíveis
+      </button>
+      <button id="btn-ranking" class="btn btn-secondary btn-enter">
+        🏆 Ver Ranking
+      </button>
+    </div>
+
+    <div class="quiz-note">
+      🔬 Este recurso está em <strong>fase BETA</strong> de testes. Escolha um módulo, veja as
+      <strong>salas públicas</strong> abertas daquela categoria e entre, ou <strong>crie sua própria
+      sala</strong> e vire o <strong>Host</strong>. Somente o Host inicia a partida. Cada partida tem
+      <strong>15 perguntas</strong> com 20 segundos cada. Quanto mais rápido você responder, mais
+      pontos ganha.
+    </div>
+
+    <div id="quiz-history" class="quiz-history d-none">
+      <div class="history-title">Seu histórico de partidas</div>
+      <div class="history-list" id="quiz-history-list"></div>
+    </div>
+  </section>
+
+  <!-- ── RANKING ── -->
+  <section id="view-ranking" class="quiz-view d-none">
+    <div class="rooms-head">
+      <button type="button" class="btn-back" onclick="Quiz.goHome()" aria-label="Voltar">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="rooms-head-text">
+        <h1>Ranking do Quiz</h1>
+        <p>Classificação geral dos jogadores do Quiz Multiplayer</p>
+      </div>
+    </div>
+
+    <div id="ranking-loading" class="rooms-loading">
+      <div class="spinner"></div>
+      <p>Carregando ranking...</p>
+    </div>
+
+    <div id="quiz-ranking" class="quiz-ranking d-none"></div>
+  </section>
+
+  <!-- ── LISTA DE SALAS ── -->
+  <section id="view-rooms" class="quiz-view d-none">
+    <div class="rooms-head">
+      <button type="button" class="btn-back" onclick="Quiz.backToCategories()" aria-label="Voltar">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="rooms-head-text">
+        <h1>Salas disponíveis</h1>
+        <p>Categoria: <span id="rooms-category-label"></span></p>
+      </div>
+    </div>
+
+    <div id="rooms-loading" class="rooms-loading">
+      <div class="spinner"></div>
+      <p>Buscando salas...</p>
+    </div>
+
+    <div id="rooms-list" class="rooms-list d-none"></div>
+
+    <div id="rooms-empty" class="rooms-empty d-none">
+      <div class="rooms-empty-icon">🎮</div>
+      <h3>Nenhuma sala encontrada.</h3>
+      <p>Seja o primeiro a criar uma sala.</p>
+    </div>
+
+    <div class="rooms-create-wrap">
+      <button id="btn-criar-sala" type="button" class="btn btn-primary btn-create-room">
+        + Criar Sala
+      </button>
+    </div>
+  </section>
+
+  <!-- ── SALA (LOBBY) ── -->
+  <section id="view-room" class="quiz-view d-none">
+    <div class="room-card">
+      <div class="room-head">
+        <div class="room-head-text">
+          <h2 id="room-name">Sala</h2>
+          <p id="room-category" class="room-category"></p>
+        </div>
+        <span id="room-status-badge" class="room-status-badge st-waiting">Aguardando jogadores</span>
+      </div>
+
+      <div class="room-count">
+        <span id="room-count-now">1</span>
+        <small>/ <span id="room-count-max">8</span> jogadores</small>
+      </div>
+
+      <div class="room-players" id="room-players"></div>
+
+      <div id="room-host-controls" class="room-host-controls d-none">
+        <button id="btn-iniciar" type="button" class="btn btn-primary btn-start-room">Iniciar Partida</button>
+        <button id="btn-cancelar" type="button" class="btn btn-secondary btn-cancel-room">Cancelar Sala</button>
+      </div>
+
+      <div id="room-waiting" class="room-waiting d-none">
+        <span class="pulse-dot"></span>
+        <span>Aguardando o Host iniciar...</span>
+      </div>
+
+      <button id="btn-sair-sala" type="button" class="btn btn-secondary room-leave">Sair da sala</button>
+    </div>
+  </section>
+
+  <!-- ── JOGO ── -->
+  <section id="view-game" class="quiz-view d-none">
+    <div class="game-topbar">
+      <div class="game-progress">
+        Pergunta <span id="game-qindex">1</span> de <span id="game-qtotal">15</span>
+      </div>
+      <div class="game-timer" id="game-timer">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
+        <span id="game-timer-value">20</span>
+      </div>
+    </div>
+
+    <div class="game-grid">
+      <div class="game-main">
+        <div class="game-question-card">
+          <h2 id="game-enunciado"></h2>
+          <div id="game-alternativas" class="game-alts"></div>
+          <div id="game-pause" class="game-pause">
+            <span class="pause-spinner" aria-hidden="true"></span>
+            <span>Próxima pergunta em <strong class="pause-value">4</strong>s</span>
+          </div>
+          <div id="game-feedback" class="quiz-feedback"></div>
+          <div id="game-summary" class="quiz-summary"></div>
+        </div>
+      </div>
+      <aside class="game-ranking">
+        <div class="ranking-title">Classificação ao vivo</div>
+        <div class="ranking-list" id="game-ranking-list"></div>
+      </aside>
+    </div>
+
+    <div class="game-leave-wrap">
+      <button id="btn-sair-jogo" type="button" class="btn btn-secondary game-leave">Sair da partida</button>
+    </div>
+  </section>
+
+  <!-- ── FINAL ── -->
+  <section id="view-final" class="quiz-view d-none">
+    <div class="page-header text-center">
+      <h1>🏆 Fim de partida!</h1>
+      <p id="final-subtitle">A classificação final desta partida.</p>
+    </div>
+    <div class="final-podium" id="final-podium"></div>
+    <div class="final-stats" id="final-stats">
+      <div class="final-stats-title">Sua performance</div>
+      <div class="stats-grid" id="final-stats-grid"></div>
+      <div class="final-stats-title" style="margin-top:18px;">Classificação completa</div>
+      <div class="ranking-list" id="final-class-list"></div>
+    </div>
+    <div class="final-actions">
+      <button class="btn btn-secondary" onclick="Quiz.goToRoomsList()">Voltar para lista de salas</button>
+      <button class="btn btn-primary" onclick="Quiz.createNewRoom()">Criar nova sala</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
+<script src="../JS/shared.js?v=7"></script>
+<script src="../JS/api.js"></script>
+<script src="../JS/script.js"></script>
+<script src="../JS/quiz.js"></script>
+
+</body>
+</html>

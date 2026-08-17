@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking — Diversões</title>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/estilominhaconta.css">
+  <link rel="stylesheet" href="../css/ranking.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <a href="../index.html"><img src="../img/seadi_1.png" alt="Logo SEADI" class="sidebar-logo-img"></a>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-label">Principal</span>
+    <a class="nav-link" href="../index.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 21V12h6v9"/></svg>
+      Página inicial
+    </a>
+    <a class="nav-link" href="progresson1.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Progresso
+    </a>
+    <span class="nav-label">Diversões</span>
+    <a class="nav-link" href="quiz.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16M4 8l6 2M20 8l-6 2"/><path d="M3 16h18"/><path d="M12 16v4"/></svg>
+      Quiz Multiplayer
+      <span class="badge-beta">BETA</span>
+    </a>
+    <a class="nav-link active" href="ranking.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8"/></svg>
+      Ranking
+    </a>
+    <a class="nav-link" href="conquistas.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0z"/></svg>
+      Conquistas
+    </a>
+    <a class="nav-link" href="interativo.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/><path d="M17.32 5H6.68a4 4 0 00-3.98 3.58L2.16 20a1.92 1.92 0 003.36 1.24l2.12-2.53a4 4 0 012.64-1.31h3.44a4 4 0 012.64 1.31l2.12 2.53a1.92 1.92 0 003.36-1.24l-.54-11.42A4 4 0 0017.32 5z"/></svg>
+      Simuladores
+      <span class="badge-beta">BETA</span>
+    </a>
+    <span class="nav-label">Conta</span>
+    <a class="nav-link" href="cadastro.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Dados cadastrais
+    </a>
+    <a class="nav-link" href="criadores.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Criadores
+    </a>
+    <a class="nav-link" href="senha.html">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Alterar senha
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-link danger" href="#" onclick="logout()">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+      Sair
+    </a>
+  </div>
+</aside>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-left">
+    <button class="hamburger" onclick="toggleSidebar()">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="header-title">Ranking</span>
+  </div>
+
+  <div class="perfil-wrapper">
+    <div class="profile-trigger" id="btn-menu-perfil">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-pequeno" alt="avatar">
+      <span id="display-nome-curto">Usuário</span>
+      <i class="arrow-icon">▼</i>
+    </div>
+    <div id="idMenuPerfil" class="menu-premium">
+      <a href="cadastro.html">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Minha Conta
+      </a>
+      <a href="#" onclick="logout()" class="btn-logout">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg>
+        Sair da Plataforma
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== CONTEÚDO ===== -->
+<main class="main">
+  <div class="page-header">
+    <h1>Ranking dos alunos</h1>
+    <p>Veja quem está online, quem mais estuda, os craques do Quiz e as conquistas da turma.</p>
+  </div>
+
+  <!-- Estatísticas da turma -->
+  <section class="rank-section" id="sec-stats">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Geral
+    </h2>
+    <div class="stats-strip" id="stats-strip">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Online agora -->
+  <section class="rank-section" id="sec-online">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg>
+      Online agora
+    </h2>
+    <div class="online-list" id="online-list">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Todos os alunos -->
+  <section class="rank-section" id="sec-students">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+      Todos os alunos
+    </h2>
+    <div class="rank-table-wrap">
+      <table class="rank-table" id="students-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Aluno</th>
+            <th>Progresso</th>
+            <th>Módulos</th>
+            <th>Dias ativos</th>
+            <th>Último acesso</th>
+          </tr>
+        </thead>
+        <tbody id="students-body">
+          <tr><td colspan="6" class="rank-loading">Carregando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Curso mais rápido -->
+  <section class="rank-section" id="sec-fastest">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Curso completo em menos tempo
+    </h2>
+    <div class="podium-list" id="fastest-list">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Melhores no Quiz -->
+  <section class="rank-section" id="sec-quiz">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16M4 8l6 2M20 8l-6 2"/><path d="M3 16h18"/><path d="M12 16v4"/></svg>
+      Melhores no Quiz Multiplayer
+    </h2>
+    <div class="rank-table-wrap">
+      <table class="rank-table quiz-table" id="quiz-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Aluno</th>
+            <th>Vitórias</th>
+            <th>Pódios</th>
+            <th>Partidas</th>
+            <th>Taxa de vitória</th>
+            <th>Melhor nota</th>
+          </tr>
+        </thead>
+        <tbody id="quiz-body">
+          <tr><td colspan="7" class="rank-loading">Carregando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Melhores por categoria -->
+  <section class="rank-section" id="sec-quiz-cat">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Campeões por categoria
+    </h2>
+    <div class="cat-grid" id="cat-grid">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Pioneiros -->
+  <section class="rank-section" id="sec-pioneiros">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13l1.5 8-5-3-5 3 1.5-8"/></svg>
+      Pioneiros da plataforma
+    </h2>
+    <div class="pioneer-grid" id="pioneer-grid">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Maiores sequências -->
+  <section class="rank-section" id="sec-streak">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>
+      Maiores sequências de acesso
+    </h2>
+    <div class="podium-list" id="streak-list">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Conquistas por aluno -->
+  <section class="rank-section" id="sec-conquistas">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0012 0z"/></svg>
+      Conquistas por aluno
+    </h2>
+    <div class="podium-list" id="conquistas-list">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+
+  <!-- Melhores dias de acesso -->
+  <section class="rank-section" id="sec-days">
+    <h2 class="rank-title">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Melhores dias de acesso (últimos 14 dias)
+    </h2>
+    <div class="bar-chart" id="days-chart">
+      <p class="rank-loading">Carregando...</p>
+    </div>
+  </section>
+</main>
+
+<script src="../JS/shared.js?v=7"></script>
+<script src="../JS/api.js"></script>
+<script src="../JS/script.js"></script>
+<script src="../JS/ranking.js"></script>
+</body>
+</html>
