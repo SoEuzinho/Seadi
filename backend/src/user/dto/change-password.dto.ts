@@ -35,7 +35,7 @@
  * ========================================================================
  */
 
-import { IsString, MinLength } from 'class-validator';
+import { IsString, MinLength, Matches } from 'class-validator';
 
 /**
  * DTO para alteração de senha.
@@ -66,7 +66,7 @@ export class ChangePasswordDto {
    * 
    * Validações:
    * - @IsString: Deve ser uma string
-   * - @MinLength(4): Mínimo de 4 caracteres
+   * - @MinLength(8) + @Matches: mínimo de 8 caracteres, com letras e números
    * 
    * A nova senha deve ser DIFERENTE da atual.
    * Esta validação não está neste DTO, mas pode ser adicionada no Service.
@@ -75,6 +75,7 @@ export class ChangePasswordDto {
    * Exemplo inválido: "abc" (muito curto)
    */
   @IsString()
-  @MinLength(4)
+  @MinLength(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
+  @Matches(/(?=.*[A-Za-z])(?=.*\d)/, { message: 'A senha deve ter letras e números' })
   newPassword: string;
 }

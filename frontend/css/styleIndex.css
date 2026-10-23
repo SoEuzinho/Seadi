@@ -941,3 +941,28 @@ main {
 @media (prefers-reduced-motion: reduce) {
     main { animation: none; }
 }
+
+/* ── Ajustes de desempenho ── */
+/* Brilho estático no selo BETA (a animação infinita de sombra pesava) */
+.badge-beta { animation: none; }
+
+/* No celular o desfoque de fundo é caro: troca por fundo sólido */
+@media (max-width: 768px) {
+    .header-elite,
+    .glass-shell,
+    .menu-premium {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    .header-elite { background: #0b0f1a; }
+    .menu-premium { background: #141923; }
+}
+
+/* Quem pediu menos movimento no sistema não vê animações contínuas */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-iteration-count: 1 !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

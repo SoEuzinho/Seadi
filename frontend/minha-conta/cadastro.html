@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../css/estilominhaconta.css">
     <link rel="stylesheet" href="../css/tutorial.css">
@@ -16,7 +19,7 @@
 <!-- ===== SIDEBAR ===== -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
-    <a href="../index.html"><img src="../img/seadi_1.png" alt="Logo SEADI" class="sidebar-logo-img"></a>
+    <a href="../index.html"><img src="../img/seadi_1.webp" alt="Logo SEADI" class="sidebar-logo-img"></a>
   </div>
   <nav class="sidebar-nav">
     <span class="nav-label">Principal</span>
@@ -82,7 +85,7 @@
     <!-- Menu de perfil -->
     <div class="perfil-wrapper">
       <div class="profile-trigger" id="btn-menu-perfil">
-        <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-pequeno" alt="avatar">
+        <img src="../img/avatar-padrao.svg" id="avatar-pequeno" alt="avatar">
         <span id="display-nome-curto">Usuário</span>
         <i class="arrow-icon">▼</i>
       </div>
@@ -107,11 +110,16 @@
   </div>
   <div class="card">
     <div class="profile-avatar-wrap">
-        <div class="avatar-container">
-            <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-grande" class="avatar-img" alt="avatar grande">
-            <label for="input-file" class="upload-badge">📷</label>
-            <input type="file" id="input-file" accept="image/*" class="d-none">
-            <span id="display-nome-curto"></span>
+      <div class="avatar-container">
+        <img src="../img/avatar-padrao.svg" id="avatar-grande" class="avatar-img" alt="Foto de perfil">
+        <label for="input-file" class="upload-badge" title="Trocar foto" aria-label="Trocar foto de perfil">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </label>
+        <input type="file" id="input-file" accept="image/png,image/jpeg,image/webp" class="d-none">
+      </div>
+      <div class="profile-avatar-info">
+        <strong id="perfil-nome"></strong>
+        <span>Toque na câmera para trocar a foto (JPG, PNG ou WebP, até 5 MB)</span>
       </div>
     </div>
 
@@ -139,7 +147,7 @@
       </div>
 
       <div class="form-footer">
-        <button class="btn btn-secondary" onclick="showToast('Alterações descartadas.')">↩Cancelar</button>
+        <button type="button" class="btn btn-secondary" id="btn-cancelar">Desfazer alterações</button>
         <button class="btn btn-primary" onclick="salvarDados()">Salvar alterações</button>
       </div>
     </div>
@@ -152,7 +160,7 @@
   <span id="toast-msg"></span>
 </div>
 
-<script src="../JS/shared.js?v=7"></script>
+<script src="../JS/shared.js?v=8"></script>
 <script src="../JS/api.js"></script>
 <script src="../JS/script.js"></script>
     <script src="../JS/tutorial.js"></script>

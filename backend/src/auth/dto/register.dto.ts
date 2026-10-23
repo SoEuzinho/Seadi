@@ -31,7 +31,7 @@
  * ========================================================================
  */
 
-import { IsEmail, IsString, MinLength, IsOptional } from 'class-validator';
+import { IsEmail, IsString, MinLength, Matches, IsOptional } from 'class-validator';
 
 /**
  * DTO para registro de novo usuário.
@@ -75,7 +75,7 @@ export class RegisterDto {
    * 
    * Validações:
    * - @IsString: Deve ser uma string
-   * - @MinLength(4): Mínimo de 4 caracteres
+   * - @MinLength(8) + @Matches: mínimo de 8 caracteres, com letras e números
    * 
    * A senha é criptografada com bcrypt no service antes de salvar.
    * 
@@ -83,7 +83,8 @@ export class RegisterDto {
    * Exemplo inválido: "abc" (muito curto)
    */
   @IsString()
-  @MinLength(4)
+  @MinLength(8, { message: 'A senha deve ter pelo menos 8 caracteres' })
+  @Matches(/(?=.*[A-Za-z])(?=.*\d)/, { message: 'A senha deve ter letras e números' })
   password: string;
 
   /**

@@ -42,7 +42,7 @@ async function cadastrar() {
   if (!nome.value.trim()) { showFieldError('nome', 'Digite seu nome'); hasError = true; }
   else if (nome.value.trim().length < 2) { showFieldError('nome', 'Digite seu nome completo'); hasError = true; }
   if (!email.value.trim() || !emailRegex.test(email.value.trim())) { showFieldError('email', 'Digite um email válido'); hasError = true; }
-  if (nova.value.length < 4) { showFieldError('pw-nova', 'A senha deve ter pelo menos 4 caracteres'); hasError = true; }
+  if (!senhaValida(nova.value)) { showFieldError('pw-nova', 'Use pelo menos 8 caracteres, com letras e números'); hasError = true; }
   if (nova.value !== confirm.value) { showFieldError('pw-confirm', 'As senhas não coincidem'); hasError = true; }
   if (!termos.checked) { showFieldError('termos', 'Você precisa aceitar os termos'); hasError = true; }
   if (hasError) return;
