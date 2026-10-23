@@ -1,18 +1,6 @@
+// Frontend e API são servidos pelo mesmo servidor (NestJS)
 var API_BASE = '/api';
 var SOCKET_BASE = '';
-
-// Detecta se está rodando no Vercel (produção)
-if (window.location.hostname.includes('vercel.app') || window.location.hostname.includes('vercel.dev')) {
-  // No Vercel, o backend pode estar em outro domínio
-  // Configurar BACKEND_URL via env ou usar o domínio do backend
-  var backendUrl = (typeof __BACKEND_URL__ !== 'undefined' && __BACKEND_URL__)
-    ? __BACKEND_URL__
-    : '';
-  if (backendUrl) {
-    API_BASE = backendUrl + '/api';
-    SOCKET_BASE = backendUrl;
-  }
-}
 
 // ── Sessão ──
 // O token JWT agora vive em um cookie httpOnly (seadi_session), gerenciado

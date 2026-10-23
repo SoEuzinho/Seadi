@@ -85,7 +85,7 @@ O **SEADI** nasceu no **Projeto Integrador do SENAC** para enfrentar esse proble
 | **Backend** | Node.js, NestJS 10, TypeScript, Passport + JWT, Bcrypt, Class Validator, Multer, Nodemailer |
 | **Tempo real** | Socket.io (`@nestjs/websockets`) |
 | **Banco de dados** | MariaDB 11.4 + Prisma ORM 5 |
-| **Infraestrutura** | Docker, Docker Compose, phpMyAdmin, Vercel |
+| **Infraestrutura** | Docker, Docker Compose, phpMyAdmin |
 
 ---
 
@@ -129,10 +129,8 @@ Seadi/
 │   ├── pasta-modulos/       # conteúdo das 29 aulas
 │   ├── minha-conta/         # perfil, progresso, quiz, ranking, conquistas, simuladores, criadores
 │   ├── JS/ · css/ · img/
-├── api/                     # função serverless (proxy na Vercel)
 ├── docker-compose.yml
-├── Dockerfile
-└── vercel.json
+└── Dockerfile
 ```
 
 ---
