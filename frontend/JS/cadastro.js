@@ -102,8 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   function updateNomeDisplay(nome) {
-    var el = document.getElementById('display-nome-curto');
-    if (el) el.textContent = nome || 'Usuário';
+    // O nome curto do cabeçalho é cuidado pelo script.js (só o primeiro nome)
     var perfilNome = document.getElementById('perfil-nome');
     if (perfilNome) perfilNome.textContent = nome || 'Usuário';
   }
@@ -152,6 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+
+  // Mostra o nome salvo na hora, antes da resposta do servidor
+  var nomeSalvo = localStorage.getItem('nomeUsuario');
+  if (nomeSalvo) updateNomeDisplay(nomeSalvo);
 
   carregarDados();
 

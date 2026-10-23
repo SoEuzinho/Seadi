@@ -44,7 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var tag = bloqueada ? 'div' : 'a';
-      var attrs = bloqueada ? '' : ' href="' + href + '"';
+      var attrs = bloqueada
+        ? ' aria-disabled="true" title="Conclua a aula anterior para desbloquear"'
+        : ' href="' + href + '"';
 
       var inner = '<h3>' + aula.titulo + '</h3>';
       if (progressoVideo > 0 && !concluido) {

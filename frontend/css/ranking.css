@@ -564,10 +564,68 @@
 
 @media (max-width: 480px) {
   .rank-section { padding: 14px; }
-  .rank-table th:nth-child(5),
-  .rank-table td:nth-child(5) { display: none; }
-  .quiz-table th:nth-child(6),
-  .quiz-table td:nth-child(6) { display: none; }
+}
+
+/* ── Celular: cada aluno vira um card (sem arrastar a tabela para o lado) ── */
+@media (max-width: 600px) {
+  .rank-table-wrap { overflow-x: visible; }
+  .rank-table { min-width: 0; }
+  .rank-table thead { display: none; }
+  .rank-table,
+  .rank-table tbody { display: block; }
+
+  .rank-table tr {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .rank-table tr.row-eu { border-color: var(--brand); }
+  .rank-table tr.done-row td { background: none; }
+
+  .rank-table td {
+    display: block;
+    padding: 0;
+    border: none;
+    white-space: normal;
+  }
+  .rank-table td:nth-child(n+3) {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    font-size: 13px;
+  }
+  .rank-table td:nth-child(n+3)::before {
+    min-width: 92px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .rank-table .sub-line { width: 100%; padding-left: 100px; }
+  .rank-table .pbar { flex: 1; min-width: 80px; }
+  .rank-table td[colspan] { grid-column: 1 / -1; text-align: center; }
+  .rank-table td[colspan]::before { content: none; }
+
+  #students-table td:nth-child(3)::before { content: "Progresso"; }
+  #students-table td:nth-child(4)::before { content: "Módulos"; }
+  #students-table td:nth-child(5)::before { content: "Dias ativos"; }
+  #students-table td:nth-child(6)::before { content: "Último acesso"; }
+
+  #quiz-table td:nth-child(3)::before { content: "Vitórias"; }
+  #quiz-table td:nth-child(4)::before { content: "Pódios"; }
+  #quiz-table td:nth-child(5)::before { content: "Partidas"; }
+  #quiz-table td:nth-child(6)::before { content: "Taxa de vitória"; }
+  #quiz-table td:nth-child(7)::before { content: "Melhor nota"; }
 }
 
 @media (prefers-reduced-motion: reduce) {

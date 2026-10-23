@@ -1165,3 +1165,59 @@
   .nb-toolbar { gap: 6px; }
   .nb-address { padding: 9px 12px; font-size: 12px; }
 }
+
+/* ── Simulador de redes no celular: fluxo de cima para baixo ── */
+@media (max-width: 640px) {
+  .net-stage { overflow-x: visible; }
+  .net-flow {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    gap: 0;
+  }
+  .net-node {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    min-width: 0;
+    padding: 12px 14px;
+    text-align: left;
+  }
+  .net-node:hover { transform: none; }
+  .net-node .net-state { margin-left: auto; }
+  .net-link {
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 10px;
+    padding: 4px 0 4px 26px;
+  }
+  .net-line { width: 4px; height: 26px; }
+  .net-line::after {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(180deg, transparent, #0EA5E9, #10B981, transparent);
+    animation-name: netPacketsDown;
+  }
+  .net-link.on .net-line { background: linear-gradient(180deg, #0EA5E9, #10B981); }
+  .net-link-label { display: block; text-align: left; }
+}
+
+@keyframes netPacketsDown {
+  0%   { transform: translateY(-14px); }
+  100% { transform: translateY(30px); }
+}
+
+/* Servidores também em coluna no celular: cada cabo aparece antes do servidor */
+@media (max-width: 640px) {
+  .net-servers {
+    flex-direction: column;
+    min-width: 0;
+    gap: 0;
+    margin-top: 0;
+  }
+  .net-server { min-width: 0; }
+  #link-site { order: 1; }
+  #net-site  { order: 2; }
+  #link-game { order: 3; }
+  #net-game  { order: 4; }
+}
