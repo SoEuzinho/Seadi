@@ -70,11 +70,16 @@ function showToast(msg) {
 }
 
 // ── Password strength checker ──
+// Mesma regra do backend: 8+ caracteres, com letras e números
+function senhaValida(val) {
+  return val.length >= 8 && /[A-Za-z]/.test(val) && /\d/.test(val);
+}
+
 function checkPw() {
   var el = document.getElementById('pw-nova');
   if (!el) return;
   var val = el.value;
-  var ok = val.length >= 4;
+  var ok = senhaValida(val);
 
   var rule = document.getElementById('rule-len');
   if (rule) rule.classList.toggle('ok', ok);
@@ -82,13 +87,23 @@ function checkPw() {
   var bar = document.getElementById('pw-strength');
   if (bar) bar.style.display = val.length > 0 ? 'block' : 'none';
 
-  ['seg1', 'seg2', 'seg3', 'seg4'].forEach(function (id) {
+  // 4 níveis: tamanho, letras+números, maiúsculas+minúsculas, símbolo/12+
+  var nivel = 0;
+  if (val.length >= 8) nivel++;
+  if (/[A-Za-z]/.test(val) && /\d/.test(val)) nivel++;
+  if (/[a-z]/.test(val) && /[A-Z]/.test(val)) nivel++;
+  if (/[^A-Za-z0-9]/.test(val) || val.length >= 12) nivel++;
+  if (!ok) nivel = Math.min(nivel, 1);
+  var cores = ['#EF4444', '#F59E0B', '#10B981', '#10B981'];
+  var nomes = ['Fraca', 'Razoável', 'Boa', 'Forte'];
+
+  ['seg1', 'seg2', 'seg3', 'seg4'].forEach(function (id, i) {
     var seg = document.getElementById(id);
-    if (seg) seg.style.background = ok ? '#10B981' : 'var(--border)';
+    if (seg) seg.style.background = i < nivel ? cores[nivel - 1] : 'var(--border)';
   });
 
   var lbl = document.getElementById('pw-strength-label');
-  if (lbl) lbl.textContent = val.length > 0 ? 'Força: ' + (ok ? 'Adequada' : 'Curta') : 'Força: —';
+  if (lbl) lbl.textContent = val.length > 0 ? 'Força: ' + (nivel ? nomes[nivel - 1] : 'Fraca') : 'Força: —';
 
   checkConfirm();
 }

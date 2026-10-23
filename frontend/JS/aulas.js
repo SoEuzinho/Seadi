@@ -4,7 +4,7 @@ var MODULOS = [
     ordem: 1,
     titulo: 'Iniciante',
     descricao: 'Primeiros passos no computador',
-    icone: 'inici.png',
+    icone: 'inici.webp',
     prefixo: 'pasta-modulos/1-modulo_iniciante/',
     aulas: [
       { id: 1, ordem: 1, titulo: 'Como Ligar e Desligar', arquivo: '1-como-ligar-e-desligar.html' },
@@ -23,7 +23,7 @@ var MODULOS = [
     ordem: 2,
     titulo: 'Básico',
     descricao: 'Fundamentos para o dia a dia',
-    icone: 'avanç.png',
+    icone: 'avanç.webp',
     prefixo: 'pasta-modulos/2-modulo_basico/',
     aulas: [
       { id: 10, ordem: 1, titulo: 'Google e Navegação', arquivo: '1-google-e-navegação.html' },
@@ -44,7 +44,7 @@ var MODULOS = [
     ordem: 3,
     titulo: 'Avançado',
     descricao: 'Conceitos avançados e produtividade',
-    icone: 'intermed.png',
+    icone: 'intermed.webp',
     prefixo: 'pasta-modulos/3-modulo_avançado/',
     aulas: [
       { id: 21, ordem: 1, titulo: 'Organização digital', arquivo: '1-organização-digital.html' },

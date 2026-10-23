@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../css/estilominhaconta.css">
-  <link rel="stylesheet" href="../css/criadores.css?v=4">
+  <link rel="stylesheet" href="../css/criadores.css?v=5">
   <title>Criadores — Minha Área</title>
 </head>
 <body>
@@ -15,7 +18,7 @@
 <!-- ===== SIDEBAR ===== -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
-    <a href="../index.html"><img src="../img/seadi_1.png" alt="Logo SEADI" class="sidebar-logo-img"></a>
+    <a href="../index.html"><img src="../img/seadi_1.webp" alt="Logo SEADI" class="sidebar-logo-img"></a>
   </div>
   <nav class="sidebar-nav">
     <span class="nav-label">Principal</span>
@@ -80,8 +83,8 @@
   <!-- Menu de perfil -->
   <div class="perfil-wrapper">
     <div class="profile-trigger" id="btn-menu-perfil">
-      <img src="https://www.w3schools.com/howto/img_avatar.png" id="avatar-pequeno" alt="avatar">
-      <span id="display-nome-curto">Usuário</span>
+      <img src="../img/avatar-padrao.svg" id="avatar-pequeno" alt="avatar">
+      <span id="display-nome-curto"></span>
       <i class="arrow-icon">▼</i>
     </div>
     <div id="idMenuPerfil" class="menu-premium">
@@ -98,7 +101,6 @@
 </header>
 
 <!-- ===== PARTÍCULAS (introdução) ===== -->
-<div class="credits-bg" aria-hidden="true"></div>
 
 <!-- ===== MAIN ===== -->
 <main class="main">
@@ -109,11 +111,11 @@
     <section class="credits-hero">
       <span class="credits-kicker">SEADI · Equipe</span>
       <h1 class="credits-title" id="credits-title">Criadores</h1>
-      <p class="credits-subtitle">Equipe que participou da criação do SEADI</p>
+      <p class="credits-subtitle">Conheça quem criou o SEADI. Toque em um card para ver o que cada pessoa fez.</p>
       <div class="credits-rule"><span></span></div>
     </section>
 
-    <ul class="credits-list" id="credits-list" aria-label="Participantes do projeto"></ul>
+    <div class="credits-list" id="credits-list" aria-label="Equipe do projeto"></div>
 
     <p class="credits-count" id="credits-count"></p>
 
@@ -132,10 +134,10 @@
   </div>
 </div>
 
-<script src="../JS/shared.js?v=7"></script>
+<script src="../JS/shared.js?v=8"></script>
 <script src="../JS/api.js"></script>
 <script src="../JS/script.js"></script>
-<script src="../JS/criadores.js?v=4"></script>
+<script src="../JS/criadores.js?v=5"></script>
 
 </body>
 </html>

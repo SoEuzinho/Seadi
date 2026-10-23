@@ -1,5 +1,4 @@
-/* ═══ Google Fonts ═══ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* A fonte Inter é carregada por <link> no <head> de cada página (mais rápido que @import) */
 
 /* ═══ Variáveis de fonte ═══ */
 :root {

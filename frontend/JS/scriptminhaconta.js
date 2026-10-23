@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var hasError = false;
     if (!atual || !atual.value) { showFieldError('pw-atual', 'Digite sua senha atual'); hasError = true; }
-    if (!nova || nova.value.length < 4) { showFieldError('pw-nova', 'A nova senha deve ter pelo menos 4 caracteres'); hasError = true; }
+    if (!nova || !senhaValida(nova.value)) { showFieldError('pw-nova', 'A nova senha deve ter pelo menos 8 caracteres, com letras e números'); hasError = true; }
     if (!confirm || nova.value !== confirm.value) { showFieldError('pw-confirm', 'As senhas não coincidem'); hasError = true; }
     if (hasError) return;
 

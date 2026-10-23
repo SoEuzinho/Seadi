@@ -21,6 +21,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
+import compression from 'compression';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/filters/http-exception.filter';
 
@@ -40,13 +41,22 @@ async function bootstrap() {
   // NestExpressApplication fornece acesso às APIs do Express para configurações avançadas
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  // Compressão gzip: HTML, CSS, JS e JSON chegam bem menores ao navegador
+  app.use(compression());
+
   /**
    * Headers de segurança básicos (substitui Helmet sem dependência extra):
    * - X-Content-Type-Options: nosniff -> impede MIME sniffing do navegador
    * - X-Frame-Options: DENY -> bloqueia o app em iframes (clickjacking)
    * - Referrer-Policy: strict-origin-when-cross-origin -> reduz vazamento de URL
+   * - Strict-Transport-Security (produção) -> força HTTPS nas próximas visitas
+   * - Permissions-Policy -> desliga câmera, microfone e localização
    */
   app.use((req: any, res: any, next: any) => {
+    if (process.env.NODE_ENV === 'production') {
+      res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    }
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -111,7 +121,8 @@ async function bootstrap() {
       if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.indexOf('*') !== -1) {
         return callback(null, true);
       }
-      return callback(null, true); // Em desenvolvimento, permite todas
+      // Origem desconhecida: não libera CORS (o navegador bloqueia a resposta)
+      return callback(null, false);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -154,8 +165,19 @@ async function bootstrap() {
    * 2. Uploads: Arquivos enviados pelos usuários (fotos de perfil, etc.)
    *    Acessíveis via URL: /uploads/avatars/foto.jpg
    */
-  app.useStaticAssets(join(__dirname, '..', '..', 'frontend'), { index: false });
-  app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads' });
+  app.useStaticAssets(join(__dirname, '..', '..', 'frontend'), {
+    index: false,
+    setHeaders: (res: any, filePath: string) => {
+      // Imagens e fontes quase nunca mudam: o navegador guarda por 7 dias.
+      // HTML/CSS/JS são revalidados a cada visita (resposta 304 rápida via ETag).
+      if (/\.(png|jpe?g|webp|svg|ico|gif|woff2?)$/i.test(filePath)) {
+        res.setHeader('Cache-Control', 'public, max-age=604800');
+      } else {
+        res.setHeader('Cache-Control', 'no-cache');
+      }
+    },
+  });
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads', maxAge: '1d' });
 
   /**
    * Redirecionamento da Raiz

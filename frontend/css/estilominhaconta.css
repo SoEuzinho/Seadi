@@ -258,9 +258,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 13px;
+  border: 2px solid var(--bg-card);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: 0.3s;
+  transition: background 0.2s;
 }
 
 .upload-badge:hover {
@@ -325,6 +325,10 @@ body {
   margin-bottom: 28px; padding-bottom: 24px;
   border-bottom: 1px solid var(--border);
 }
+
+.profile-avatar-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.profile-avatar-info strong { font-size: 17px; color: var(--text-primary, #fff); overflow-wrap: anywhere; }
+.profile-avatar-info span { font-size: 13px; color: var(--text-secondary); }
 
 .profile-avatar-big {
   width: 72px; height: 72px; border-radius: 50%;
@@ -621,3 +625,20 @@ main {
 }
 
 
+
+/* ── Ajustes de desempenho e layout ── */
+/* O rodapé do formulário ocupa a linha inteira do grid */
+.form-grid .form-footer { grid-column: 1 / -1; }
+
+/* Brilho estático no selo BETA: a animação infinita de sombra
+   forçava o navegador a redesenhar a tela o tempo todo */
+.badge-beta { animation: none; }
+
+/* No celular o desfoque de fundo é caro: usa fundo sólido */
+@media (max-width: 768px) {
+  .menu-premium {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #141923;
+  }
+}
