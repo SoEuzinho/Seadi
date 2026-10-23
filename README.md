@@ -20,7 +20,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
 
-[🌐 Acessar a plataforma](https://seadi.vercel.app) · [✨ Funcionalidades](#-funcionalidades) · [🚀 Como rodar](#-como-rodar-o-projeto) · [👥 Equipe](#-equipe)
+[✨ Funcionalidades](#-funcionalidades) · [🚀 Como rodar](#-como-rodar-o-projeto) · [👥 Equipe](#-equipe)
 
 </div>
 

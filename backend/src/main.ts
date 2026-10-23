@@ -98,7 +98,7 @@ async function bootstrap() {
    * Exemplo: http://localhost:5000 pode acessar a API em http://localhost:3000
    * 
    * ALLOWED_ORIGINS: Lista de origens permitidas separadas por vírgula
-   * Exemplo: "http://localhost:5000,https://meudominio.com,https://seadi.vercel.app"
+   * Exemplo: "http://localhost:5000,https://meudominio.com"
    */
   const allowedOrigins = process.env.ALLOWED_ORIGINS
     ? process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim())
