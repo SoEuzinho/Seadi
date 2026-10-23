@@ -25,3 +25,10 @@ docker-compose.override.yml
 # OS files
 .DS_Store
 Thumbs.db
+
+# Backups e binários (não versionar)
+backups/
+*.sql
+*.sql.gz
+*.tar.gz
+*.deb
